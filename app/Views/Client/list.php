@@ -72,8 +72,8 @@
                         <?php if ($value['status'] == 1) { ?>
 
                             <td>
-                                <a href="/client-update/?id=<?= $value['client_id'] ?>">Alterar</a>
-                                <a href="/client-delete/?id=<?= $value['client_id'] ?>">Inativar</a>
+                                <a href="/client-update/?id=<?= $value['client_id'] ?>" target="_blank">Alterar</a>
+                                <a href="/client-delete/?id=<?= $value['client_id'] ?>" target="_blank">Inativar</a>
                             </td>
 
                         <?php } ?>

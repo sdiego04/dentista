@@ -25,4 +25,14 @@ class StateRepository extends ConnectionDB
      
        return $get_object;
     }
+
+    public static function all():?array
+    {
+       $sql = "SELECT * FROM states";
+      
+       $connection = ConnectionDB::getConnection();
+       $stmt = $connection->query($sql);
+   
+       return $stmt->fetchAll();
+    }
 }

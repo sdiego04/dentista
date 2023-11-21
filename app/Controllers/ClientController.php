@@ -8,16 +8,15 @@ use app\Models\Email;
 use app\Models\Profile;
 use app\Models\TypePerson;
 use app\Repositories\ClientRepository;
+use app\Repositories\StateRepository;
 use Exception;
 use stdClass;
 
 class ClientController extends Controller
 {
 
-    public function __construct()
-    {
-    }
-
+    public function __construct(){}
+    
     public function store(stdClass $params)
     {
 
@@ -39,7 +38,9 @@ class ClientController extends Controller
 
     public function form_add()
     {
-        Controller::view('Client/store');
+        $states = StateRepository::all();
+
+        Controller::view('Client/store', array('states' => $states));
     }
 
     public function list()

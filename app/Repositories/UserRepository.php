@@ -16,7 +16,7 @@ class UserRepository extends ConnectionDB{
 
     public static function get_by_email(Email $email):object|bool
     {
-        $sql = "SELECT * FROM users WHERE email = '".$email->getEmail()."'";
+        $sql = "SELECT * FROM users WHERE email = '".$email->getName()."'";
         $connection = ConnectionDB::getConnection();
 
         $stmt = $connection->query($sql);
