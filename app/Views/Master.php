@@ -12,7 +12,7 @@
 <head>
 
     <style>
-        
+
         .sidebar {
             margin: 0;
             padding: 0;
@@ -114,11 +114,11 @@
         </header>
     </div>
 
-    <div style="margin-left:-15%">
-        <div class="w3-container">
-            <?= $this->section("content") ?>
-        </div>
+    
+    <div style="margin-left: 10%;" class="container">
+        <?= $this->section("content") ?>
     </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
