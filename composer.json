@@ -1,0 +1,17 @@
+{
+    "name": "diego/estudoapvs",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diego",
+            "email": "s.diego04@gmail.com"
+        }
+    ],
+    "require": {
+        "league/plates": "^3.5"
+    }
+}
