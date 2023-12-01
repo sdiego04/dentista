@@ -14,7 +14,9 @@ $routes = [
         '/client-list' => fn () => load('ClientController', 'list'),
         '/client-delete/' => fn () => load('ClientController', 'delete'),
         '/client-actived/' => fn () => load('ClientController', 'actived'),
-        '/client-update/' => fn () => load('ClientController', 'form_update')
+        '/client-update/' => fn () => load('ClientController', 'form_update'),
+        '/type-contact-list' => fn () => load('TypeContactController', 'list'),
+        '/type-contact-update/' => fn () => load('TypeContactController', 'form_update'),
 
     ]
 ];

@@ -72,6 +72,15 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Tipo de Contato
+                </a>
+                <ul class="dropdown-menu" > 
+                    <li><a class="dropdown-item" href="/type-contact-add">Adicionar</a></li>
+                    <li><a class="dropdown-item" href="/type-contact-list">Listar</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
                 </a>
                 <ul class="dropdown-menu" > 
