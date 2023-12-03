@@ -4,7 +4,8 @@ $routes = [
     'POST' => [
        '/login' => fn() => load('LoginController', 'authenticate'),
        '/client-add' => fn () => load('ClientController', 'store'),
-       '/client-update' => fn () => load('ClientController', 'update')
+       '/client-update' => fn () => load('ClientController', 'update'),
+       '/type-contact-add' => fn () => load('TypeContactController', 'store'),
     ],
     'GET' => [
         '/login' => fn() => load('LoginController', 'index'),
@@ -17,6 +18,9 @@ $routes = [
         '/client-update/' => fn () => load('ClientController', 'form_update'),
         '/type-contact-list' => fn () => load('TypeContactController', 'list'),
         '/type-contact-update/' => fn () => load('TypeContactController', 'form_update'),
+        '/type-contact-add' => fn () => load('TypeContactController', 'form_add'),
+        '/type-contact-actived/' => fn () => load('TypeContactController', 'actived'),
+        '/type-contact-delete/' => fn () => load('TypeContactController', 'delete'),
 
     ]
 ];

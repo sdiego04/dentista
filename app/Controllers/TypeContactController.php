@@ -6,9 +6,10 @@ use app\Models\Client;
 use app\Models\Cnpj;
 use app\Models\Email;
 use app\Models\Profile;
+use app\Models\TypeContact;
 use app\Models\TypePerson;
 use app\Repositories\ClientRepository;
-use app\Repositories\StateRepository;
+
 use app\Repositories\TypeContactRepository;
 use Exception;
 use stdClass;
@@ -21,17 +22,17 @@ class TypeContactController extends Controller
     public function store(stdClass $params)
     {
 
-        if (!isset($params->email) || empty($params->email)) {
-            throw new Exception("Email vazio ");
+        if (!isset($params->name) || empty($params->name)) {
+            throw new Exception("Nome vazio ");
         }
 
-        if ($response = ClientRepository::get_by_email(new Email($params->email))) {
-            throw new Exception("Email ja cadastrado");
+        if ($response = TypeContactRepository::get_by_name($params->name)) {
+            throw new Exception("Tipo de contato ja cadastrado");
         }
 
-        $client = new Client($params);
-        if (!$get_client = ClientRepository::insert($client)) {
-            throw new Exception("Erro ao salvar o cliente");
+        $contact = new TypeContact($params);
+        if (!$get_contact = TypeContactRepository::insert($contact)) {
+            throw new Exception("Erro ao salvar o tipo de contato");
         }
 
         Controller::view('Dashboard');
@@ -39,9 +40,8 @@ class TypeContactController extends Controller
 
     public function form_add()
     {
-        $states = StateRepository::all();
 
-        Controller::view('Client/store', array('states' => $states));
+        Controller::view('TypeContact/store');
     }
 
     public function list()
@@ -59,13 +59,13 @@ class TypeContactController extends Controller
             throw new Exception("Parametro vazio");
         }
 
-        if (!$client = ClientRepository::get($id)) {
-            throw new Exception("Cliente não encontrado!");
+        if (!$contact = TypeContactRepository::get($id)) {
+            throw new Exception("Tipo de contato não encontrado!");
         }
 
-        $client->setStatus(0);
+        $contact->setStatus(0);
 
-        if (!$response = ClientRepository::update($client)) {
+        if (!$response = TypeContactRepository::update($contact)) {
             throw new Exception("Erro ao ativar o cliente!");
         }
 
@@ -79,13 +79,13 @@ class TypeContactController extends Controller
             throw new Exception("Parametro vazio");
         }
 
-        if (!$client = ClientRepository::get($id)) {
-            throw new Exception("Cliente não encontrado!");
+        if (!$contact = TypeContactRepository::get($id)) {
+            throw new Exception("Tipo de contato não encontrado!");
         }
 
-        $client->setStatus(1);
+        $contact->setStatus(1);
 
-        if (!$response = ClientRepository::update($client)) {
+        if (!$response = TypeContactRepository::update($contact)) {
             throw new Exception("Erro ao ativar o cliente!");
         }
 

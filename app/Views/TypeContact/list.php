@@ -62,7 +62,7 @@
 
                             <td>
                                 <a href="/type-contact-update/?id=<?= $value['type_contact_id'] ?>" target="_blank">Alterar</a>
-                                <a href="/type-contact-delete/?id=<?= $value['type_contact_id'] ?>" target="_blank">Inativar</a>
+                                <a href="/type-contact-delete/?id=<?= $value['type_contact_id'] ?>">Inativar</a>
                             </td>
 
                         <?php } ?>

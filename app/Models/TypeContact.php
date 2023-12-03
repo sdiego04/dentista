@@ -19,7 +19,10 @@ class TypeContact{
 
             $this->setName($type_contact->name);
             $this->setStatus($type_contact->status);
-            $this->setCreatedAt($type_contact->created_at);
+            
+            if(isset($type_contact->created_at) && !is_null($type_contact->created_at)){
+                $this->setCreatedAt($type_contact->created_at);
+            }
         }
     }
 

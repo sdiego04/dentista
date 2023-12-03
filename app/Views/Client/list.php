@@ -73,7 +73,7 @@
 
                             <td>
                                 <a href="/client-update/?id=<?= $value['client_id'] ?>" target="_blank">Alterar</a>
-                                <a href="/client-delete/?id=<?= $value['client_id'] ?>" target="_blank">Inativar</a>
+                                <a href="/type-contact-delete/?id=<?= $value['client_id'] ?>">Inativar</a>
                             </td>
 
                         <?php } ?>
