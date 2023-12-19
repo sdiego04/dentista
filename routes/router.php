@@ -21,7 +21,7 @@ $routes = [
         '/type-contact-add' => fn () => load('TypeContactController', 'form_add'),
         '/type-contact-actived/' => fn () => load('TypeContactController', 'actived'),
         '/type-contact-delete/' => fn () => load('TypeContactController', 'delete'),
-
+        '/api/user/'  => fn () => loadApi('UserController', 'get'),
     ]
 ];
 
@@ -31,6 +31,31 @@ function load(string $controller, string $action){
 
         $controllerNamespace = "app\\Controllers\\" . $controller ;
 
+        if (!class_exists($controllerNamespace)) {
+            throw new Exception("o controller não exite :" . $controller .'\n', 1);
+        }
+
+        $controllerInstance = new $controllerNamespace();
+
+        if (!method_exists($controllerInstance, $action)) {
+            throw new Exception("Metodo " . $action . "não existe! \n", 1);
+        }
+
+        $controllerInstance->$action((object) $_REQUEST);
+
+    } catch (\Throwable $th) {
+        echo $th->getMessage();
+    }
+
+}
+
+
+function loadApi(string $controller, string $action){
+
+    try {
+
+        $controllerNamespace = "app\\Api\\" . $controller ;
+      
         if (!class_exists($controllerNamespace)) {
             throw new Exception("o controller não exite :" . $controller .'\n', 1);
         }

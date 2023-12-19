@@ -9,9 +9,7 @@ use League\Plates\Extension\Asset;
 
 class Controller{
     
-    public function __construct() {
-   
-    }
+    public function __construct() {}
 
     public static function view(string $view, array $data = array()):void
     {

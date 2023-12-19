@@ -5,16 +5,14 @@ namespace app\Models;
 
 use app\Models\Email;
 use app\Models\Profile;
-use app\Models\Phone;
-use DateTime;
-
+use stdClass;
 
 class User {
 
     private int $user_id;
-    private Profile $profile_id;
+    private Profile $profile;
     private string $name;
-    private string $last_name;
+    private string $lastname;
     private ?string $fantasy_name;
     private Email $email;
     private ?Cnpj $cnpj;
@@ -22,10 +20,25 @@ class User {
     private ?int $parent_id;
     private string $cro;
     private string $gender;
-    private DateTime $birth_date;
+    private string $birth_date;
     private bool $status;
 
-    public function __construct() {}
+    public function __construct(stdClass $user = null) {
+        if(!is_null($user)){
+            $this->setProfile(new Profile($user->profile_id));
+            $this->setName($user->name);
+            $this->setLastName($user->lastname);
+            $this->setFantasyName($user->fantasy_name);
+            $this->setEmail(new Email($user->email));
+            $this->setCnpj(new Cnpj($user->cnpj));
+            $this->setCpf(new Cpf($user->cpf));
+            $this->setParentId($user->parent_id);
+            $this->setCro($user->cro);
+            $this->setGender($user->gender);
+            $this->setBirthDate($user->birth_date);
+            $this->setStatus($user->status);
+        }
+    }
 
     /**
      * Get the value of user_id
@@ -82,19 +95,19 @@ class User {
     }
 
     /**
-     * Get the value of last_name
+     * Get the value of lastname
      */
     public function getLastName(): string
     {
-        return $this->last_name;
+        return $this->lastname;
     }
 
     /**
-     * Set the value of last_name
+     * Set the value of lastname
      */
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastname): self
     {
-        $this->last_name = $last_name;
+        $this->lastname = $lastname;
 
         return $this;
     }
@@ -118,27 +131,9 @@ class User {
     }
 
     /**
-     * Get the value of birth_date
-     */
-    public function getBirthDate(): DateTime
-    {
-        return $this->birth_date;
-    }
-
-    /**
-     * Set the value of birth_date
-     */
-    public function setBirthDate(DateTime $birth_date): self
-    {
-        $this->birth_date = $birth_date;
-
-        return $this;
-    }
-
-    /**
      * Get the value of status
      */
-    public function isStatus(): bool
+    public function getStatus(): bool
     {
         return $this->status;
     }
@@ -190,6 +185,24 @@ class User {
     }
 
     /**
+     * Get the value of profile
+     */
+    public function getProfile(): Profile
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set the value of profile
+     */
+    public function setProfile(Profile $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
      * Get the value of email
      */
     public function getEmail(): Email
@@ -202,7 +215,7 @@ class User {
      */
     public function setEmail(Email $email): self
     {
-        $this->email = $email->getEmail();
+        $this->email = $email;
 
         return $this;
     }
@@ -220,7 +233,7 @@ class User {
      */
     public function setCnpj(?Cnpj $cnpj): self
     {
-        $this->cnpj = $cnpj->getCnpj();
+        $this->cnpj = $cnpj;
 
         return $this;
     }
@@ -238,25 +251,25 @@ class User {
      */
     public function setCpf(?Cpf $cpf): self
     {
-        $this->cpf = $cpf->getCpf();
+        $this->cpf = $cpf;
 
         return $this;
     }
 
     /**
-     * Get the value of profile_id
+     * Get the value of birth_date
      */
-    public function getProfileId(): Profile
+    public function getBirthDate(): string
     {
-        return $this->profile_id;
+        return $this->birth_date;
     }
 
     /**
-     * Set the value of profile_id
+     * Set the value of birth_date
      */
-    public function setProfileId(Profile $profile_id): self
+    public function setBirthDate(string $birth_date): self
     {
-        $this->profile_id = $profile_id->getId();
+        $this->birth_date = $birth_date;
 
         return $this;
     }
