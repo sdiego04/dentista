@@ -6,7 +6,7 @@ use stdClass;
 
 class Api {
 
-    public static function response(int $code, bool $status, $data, string $message = null)
+    public static function response(int $code, bool $status, $data, string $message = null):void
     {
         header("HTTP/1.1");
         http_response_code($code);

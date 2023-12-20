@@ -3,7 +3,6 @@
 namespace app\Helpers;
 
 use app\Models\User;
-use Exception;
 use stdClass;
 
 class UserHelper {

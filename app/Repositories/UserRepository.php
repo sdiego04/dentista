@@ -13,15 +13,21 @@ use stdClass;
 class UserRepository extends ConnectionDB
 {
 
-    public function __construct()
-    {
-    }
-
+    public function __construct(){}
 
     public static function save(User $user): int|false
     {
 
-        $sql = "INSERT INTO users INTO () VALUES ()";
+        $sql = "INSERT INTO users INTO (type_person_id, profile_id, name, lastname,
+                fantasy_name, cpf,cnpj, email, password, parent_id, cro, gender,
+                birth_date, status) 
+                
+                VALUES (".$user->getTypePerson()->getName().", ".$user->getProfile()->getName().",
+                ".$user->getName().", ".$user->getLastName().", ".$user->getFantasyName().",
+                ".$user->getCpf()->getName().", ".$user->getCnpj()->getName().", ".$user->getEmail().",
+                ".$user->getParentId().", ".$user->getCro().", ".$user->getGender().",
+                ".$user->getBirthDate().", ".$user->getStatus().")";
+
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 
