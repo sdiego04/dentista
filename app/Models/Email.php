@@ -18,8 +18,7 @@ class Email {
     public function validateEmail(string $email)
     {
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            throw new Exception("Error Processing Request", 1);
-            
+            throw new Exception("Error Processing Request", 1);  
         }
 
         return true;

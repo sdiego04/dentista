@@ -8,7 +8,8 @@ class Api {
 
     public static function response(int $code, bool $status, $data, string $message = null)
     {
-        header("HTTP/1.1 ", '', $code);
+        header("HTTP/1.1");
+        http_response_code($code);
 
         $response = new stdClass();
         $response->status = $status;

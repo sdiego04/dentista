@@ -6,6 +6,7 @@ $routes = [
        '/client-add' => fn () => load('ClientController', 'store'),
        '/client-update' => fn () => load('ClientController', 'update'),
        '/type-contact-add' => fn () => load('TypeContactController', 'store'),
+       '/api/user'  => fn () => loadApi('UserController', 'store'),
     ],
     'GET' => [
         '/login' => fn() => load('LoginController', 'index'),
@@ -22,6 +23,7 @@ $routes = [
         '/type-contact-actived/' => fn () => load('TypeContactController', 'actived'),
         '/type-contact-delete/' => fn () => load('TypeContactController', 'delete'),
         '/api/user/'  => fn () => loadApi('UserController', 'get'),
+        '/api/user'  => fn () => loadApi('UserController', 'index'),
     ]
 ];
 

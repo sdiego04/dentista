@@ -8,6 +8,17 @@ use stdClass;
 
 class UserHelper {
 
+    public function buildDataBatchObject(array $users):array
+    {
+        $return_data = array();
+        
+        foreach ($users as $key => $value) {
+            $return_data[$key] = $this->buildDataObject(new User($value));
+        }
+
+        return $return_data;
+    }
+
     public function buildDataObject(User $user):stdClass
     {
         $object_user = new stdClass();
