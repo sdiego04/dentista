@@ -11,6 +11,7 @@ class User {
 
     private int $user_id;
     private Profile $profile;
+    private TypePerson $type_person;
     private string $name;
     private string $lastname;
     private ?string $fantasy_name;
@@ -26,6 +27,7 @@ class User {
     public function __construct(stdClass $user = null) {
         if(!is_null($user)){
             $this->setProfile(new Profile($user->profile_id));
+            $this->setTypePerson(new TypePerson($user->type_person_id));
             $this->setName($user->name);
             $this->setLastName($user->lastname);
             $this->setFantasyName($user->fantasy_name);
@@ -270,6 +272,24 @@ class User {
     public function setBirthDate(string $birth_date): self
     {
         $this->birth_date = $birth_date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of type_person
+     */
+    public function getTypePerson(): TypePerson
+    {
+        return $this->type_person;
+    }
+
+    /**
+     * Set the value of type_person
+     */
+    public function setTypePerson(TypePerson $type_person): self
+    {
+        $this->type_person = $type_person;
 
         return $this;
     }

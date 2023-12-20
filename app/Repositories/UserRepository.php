@@ -21,7 +21,7 @@ class UserRepository extends ConnectionDB
     public static function save(User $user): int|false
     {
 
-        $sql = "";
+        $sql = "INSERT INTO users INTO () VALUES ()";
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 
