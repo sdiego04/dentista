@@ -7,6 +7,8 @@ use app\Helpers\UserHelper;
 use app\Models\User;
 use app\Repositories\UserRepository;
 use app\Services\Api;
+use app\Services\Autenticate;
+
 use stdClass;
 
 class UserController {
@@ -54,7 +56,7 @@ class UserController {
         if(UserRepository::check_user_exist($params)){
             Api::response(400, false, '', 'Usuario ja existe, favor entrar em contato com o suporte');
         }
-
+        
         if(!UserRepository::save(new User($params))){
             Api::response(404, false, '', 'Houve um erro ao salvar, favor entrar em contato com o suporte');
         }

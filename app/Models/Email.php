@@ -11,6 +11,7 @@ class Email {
     
     public function __construct(string $email) 
     {
+     
         $this->validateEmail($email);
         $this->setEmail($email);
     }

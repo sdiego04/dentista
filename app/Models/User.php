@@ -5,6 +5,7 @@ namespace app\Models;
 
 use app\Models\Email;
 use app\Models\Profile;
+use app\Types\Password;
 use stdClass;
 
 class User {
@@ -16,6 +17,7 @@ class User {
     private string $lastname;
     private ?string $fantasy_name;
     private Email $email;
+    private Password $password;
     private ?Cnpj $cnpj;
     private ?Cpf $cpf;
     private ?int $parent_id;
@@ -32,6 +34,7 @@ class User {
             $this->setLastName($user->lastname);
             $this->setFantasyName($user->fantasy_name);
             $this->setEmail(new Email($user->email));
+            $this->setPassword(new Password($user->password));
             $this->setCnpj(new Cnpj($user->cnpj));
             $this->setCpf(new Cpf($user->cpf));
             $this->setParentId($user->parent_id);
@@ -290,6 +293,24 @@ class User {
     public function setTypePerson(TypePerson $type_person): self
     {
         $this->type_person = $type_person;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     */
+    public function getPassword(): Password
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     */
+    public function setPassword(Password $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
