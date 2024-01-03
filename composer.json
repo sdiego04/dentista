@@ -3,7 +3,11 @@
     "autoload": {
         "psr-4": {
             "app\\": "app/"
-        }
+        },
+        "files": [
+            "app/Helpers/ApiHelper.php",
+            "app/Helpers/RouterHelper.php"
+        ]
     },
     "authors": [
         {

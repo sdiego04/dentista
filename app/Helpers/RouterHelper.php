@@ -1,40 +1,29 @@
 <?php
 
-namespace app\Helpers;
+
 require_once __DIR__ . '/../../routes/router.php';
 
-use Exception;
 
-class RouterHelper {
+function redirect(string $routename, string $method):void
+{
+    $routes = getRouters();
+    $server_name = $_SERVER['SERVER_NAME'];
 
-    private $routes = array();
+    $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https://" : "http://";
 
-    public function __construct() {
-        $this->routes = getRouters();
+    $url = $protocol . $server_name . $routename;
+   
+    if(!isset($routes[$method])){
+        throw new Exception("tipo de metodo invalido", 1);
     }
-
-    public function redirect(string $routename, string $method):void
-    {
-        $server_name = $_SERVER['SERVER_NAME'];
-
-        $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https://" : "http://";
     
-        $url = $protocol . $server_name . $routename;
-       
-        if(!isset($this->routes[$method])){
-            throw new Exception("tipo de metodo invalido", 1);
-        }
-        
-        if(!array_key_exists($routename, $this->routes[$method])){
-            throw new Exception("Rota invalida", 1);  
-        }
-
-        header('Location:' . $url, true);
-        
-        exit;
+    if(!array_key_exists($routename, $routes[$method])){
+        throw new Exception("Rota invalida", 1);  
     }
 
-
+    header('Location:' . $url, true);
+    
+    exit;
 }
 
 
