@@ -24,6 +24,9 @@ $routes = [
         '/type-contact-delete/' => fn () => load('TypeContactController', 'delete'),
         '/api/user/'  => fn () => loadApi('UserController', 'get'),
         '/api/user'  => fn () => loadApi('UserController', 'index'),
+    ],
+    'PATCH' => [
+        '/api/user'  => fn () => loadApi('UserController', 'update'),
     ]
 ];
 
@@ -63,11 +66,17 @@ function loadApi(string $controller, string $action){
         }
 
         $controllerInstance = new $controllerNamespace();
-
+   
         if (!method_exists($controllerInstance, $action)) {
             throw new Exception("Metodo " . $action . "não existe! \n", 1);
         }
 
+        $request = $_SERVER['REQUEST_METHOD'];
+        if($request == strtoupper('PATCH')){
+            
+            $_REQUEST = json_decode(file_get_contents('php://input'));
+        }
+  
         $controllerInstance->$action((object) $_REQUEST);
 
     } catch (\Throwable $th) {

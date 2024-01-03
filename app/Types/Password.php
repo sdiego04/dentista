@@ -10,7 +10,8 @@ class Password{
     
     public function __construct(string $password)
     {
-        if(!$this->isValidMd5($password)){
+        $validMD5 = $this->isValidMd5($password);
+        if(!$validMD5 && is_bool($validMD5)){
             throw new Exception("Formato de senha invalida", 1); 
         }
 

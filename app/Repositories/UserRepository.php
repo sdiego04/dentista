@@ -2,8 +2,6 @@
 
 namespace app\Repositories;
 
-use app\Models\Cnpj;
-use app\Models\Cpf;
 use app\Models\Email;
 use app\Models\User;
 use app\Services\ConnectionDB;
@@ -15,16 +13,35 @@ class UserRepository extends ConnectionDB
 
     public function __construct(){}
 
+
+    public static function update(User $user): int|false
+    {
+        $sql = "UPDATE users 
+        SET type_person_id = '".$user->getTypePerson()->getTypePersonId()."', 
+        profile_id = '".$user->getProfile()->getId()."', name = '".$user->getName()."',
+        lastname = '".$user->getLastName()."', fantasy_name = '".$user->getFantasyName()."',
+        cpf = '".$user->getCpf()->getName()."',cnpj = '".$user->getCnpj()->getName()."', 
+        email = '".$user->getEmail()->getName()."', password = '".$user->getPassword()->getEncripty()."', 
+        parent_id = '".$user->getParentId()."', cro = '".$user->getCro()."', gender = '".$user->getGender()."',
+        birth_date = '".$user->getBirthDate()."', status = '".$user->getStatus()."',
+        updated_at = '".date('Y-m-d H:i:s')."'  WHERE user_id = ".$user->getUserId()."";
+
+        $connection = ConnectionDB::getConnection();
+        $stmt = $connection->exec($sql);
+
+        return $stmt;
+    }
+
     public static function save(User $user): int|false
     {
         $sql = "INSERT INTO users (type_person_id, profile_id, name, lastname,
                 fantasy_name, cpf,cnpj, email, password, parent_id, cro, gender,
-                birth_date, status) 
+                birth_date, status, created_at) 
                 VALUES (".$user->getTypePerson()->getTypePersonId().", ".$user->getProfile()->getId().",
                 '".$user->getName()."', '".$user->getLastName()."', '".$user->getFantasyName()."',
                 '".$user->getCpf()->getName()."', '".$user->getCnpj()->getName()."', '".$user->getEmail()->getName()."',
                 '".$user->getPassword()->getEncripty()."', ".$user->getParentId().",
-                '".$user->getCro()."', '".$user->getGender()."', '".$user->getBirthDate()."', ".$user->getStatus().")";
+                '".$user->getCro()."', '".$user->getGender()."', '".$user->getBirthDate()."', ".$user->getStatus().", '".date('Y-m-d H:i:s')."')";
 
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);

@@ -28,6 +28,11 @@ class User {
 
     public function __construct(stdClass $user = null) {
         if(!is_null($user)){
+
+            if(isset($user->user_id) && !empty($user->user_id)){
+                $this->setUserId($user->user_id);
+            }
+
             $this->setProfile(new Profile($user->profile_id));
             $this->setTypePerson(new TypePerson($user->type_person_id));
             $this->setName($user->name);

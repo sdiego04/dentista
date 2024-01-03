@@ -56,13 +56,29 @@ class UserController {
         if(UserRepository::check_user_exist($params)){
             Api::response(400, false, '', 'Usuario ja existe, favor entrar em contato com o suporte');
         }
-        
+
         if(!UserRepository::save(new User($params))){
             Api::response(404, false, '', 'Houve um erro ao salvar, favor entrar em contato com o suporte');
         }
 
         Api::response(200, true, '', 'Usuario salvo com sucesso!');
+    }
 
+    public function update(stdClass $params)
+    {  
+        if(!isset($params->user_id) || empty($params->user_id)){
+            Api::response(400, false, '', 'Nenhum parametro informado!');
+        }
+       
+        if(!$user = UserRepository::get($params->user_id)){
+            Api::response(204, false, '', 'Nenhum usuario encontrado!');
+        }
+
+        if(!UserRepository::update(new User($params))){
+            Api::response(404, false, '', 'Houve um erro ao atualizar, favor entrar em contato com o suporte');
+        }
+
+        Api::response(200, true, '', 'Usuario alterado com sucesso!');
     }
 
 }
