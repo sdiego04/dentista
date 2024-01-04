@@ -1,14 +1,14 @@
 <?php
 
-require_once '../vendor/autoload.php';
 require_once '../routes/router.php';
+require_once '../vendor/autoload.php';
 
 
 try {
 
     $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
     $request = $_SERVER['REQUEST_METHOD'];
-
+    
     if(!isset($routes[$request])){
         throw new Exception("tipo de metodo invalido", 1);
     }

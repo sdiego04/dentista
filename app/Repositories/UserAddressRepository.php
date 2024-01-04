@@ -8,7 +8,7 @@ use app\Services\ConnectionDB;
 use PDO;
 use stdClass;
 
-class UserRepository extends ConnectionDB
+class UserAddressRepository extends ConnectionDB
 {
 
     public function __construct(){}
@@ -73,7 +73,7 @@ class UserRepository extends ConnectionDB
 
     public static function all():array|bool
     {
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM users_addresses";
 
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->query($sql);

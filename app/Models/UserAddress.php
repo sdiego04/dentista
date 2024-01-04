@@ -16,8 +16,10 @@ class UserAddress{
     private string $neighborhood;
     private bool $status;
 
-    public function __construct(User $user) {
+    public function __construct(User $user, State $state, City $city) {
         $this->setUserId($user->getUserId());
+        $this->setState($state);
+        $this->setCity($city);
     }
 
     /**

@@ -24,6 +24,7 @@ $routes = [
         '/type-contact-delete/' => fn () => load('TypeContactController', 'delete'),
         '/api/user/'  => fn () => loadApi('UserController', 'get'),
         '/api/user'  => fn () => loadApi('UserController', 'index'),
+        '/api/user-address'  => fn () => loadApi('UserAddressController', 'index'),
     ],
     'PATCH' => [
         '/api/user'  => fn () => loadApi('UserController', 'update'),

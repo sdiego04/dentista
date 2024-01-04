@@ -66,7 +66,6 @@ class UserController {
     {  
         if(!isset($params->user_id) || empty($params->user_id)){
             response(400, false, '', 'Nenhum parametro informado!');
-            response(400, false, '', 'Nenhum parametro informado!');
         }
        
         if(!$user = UserRepository::get($params->user_id)){
@@ -78,6 +77,19 @@ class UserController {
         }
 
         response(200, true, '', 'Usuario alterado com sucesso!');
+    }
+
+    public function inative(int $user_id)
+    {
+        if(!$user = UserRepository::get($user_id)){
+            response(204, false, '', 'Nenhum usuario encontrado!');
+        }
+
+        if(!UserRepository::inative($user_id)){
+            response(404, false, '', 'Houve um erro ao inativar o usuario, favor entrar em contato com o suporte');
+        }
+
+        response(200, true, '', 'Usuario inativado com sucesso!');
     }
 
 }
