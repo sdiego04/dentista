@@ -18,9 +18,9 @@ class UserController {
         $this->user_helper = new UserHelper();    
     }
 
-    public function index()
-    {
-        if(!$list = UserRepository::all()){
+    public function index(stdClass $options)
+    {   
+        if(!$list = UserRepository::all($options)){
             response(204, false, '', 'Nenhum usuario encontrado!');
         }
 

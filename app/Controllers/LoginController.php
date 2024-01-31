@@ -15,6 +15,7 @@ class LoginController extends Controller
 
     public function index()
     {
+        phpinfo();die;
        return Controller::view('Login');
     }
 

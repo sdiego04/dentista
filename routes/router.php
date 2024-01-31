@@ -73,8 +73,13 @@ function loadApi(string $controller, string $action){
         }
 
         $request = $_SERVER['REQUEST_METHOD'];
+        
+        $params = json_decode(file_get_contents('php://input'));
+        if(!empty($params)){
+            $_REQUEST = $params;
+        }
+        //verificar e remover se ainda for preciso dessa validacao
         if($request == strtoupper('PATCH')){
-            
             $_REQUEST = json_decode(file_get_contents('php://input'));
         }
   

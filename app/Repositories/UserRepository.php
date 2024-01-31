@@ -2,6 +2,8 @@
 
 namespace app\Repositories;
 
+use app\BaseRepositories\BaseUser;
+use app\Collections\UserList;
 use app\Models\Email;
 use app\Models\User;
 use app\Services\ConnectionDB;
@@ -13,6 +15,38 @@ class UserRepository extends ConnectionDB
 
     public function __construct(){}
 
+
+    /**
+     * @property string order
+     * @property int type_order 0 ASC/1 = DESC
+     */
+    public static function all(stdClass $options = null):UserList|bool
+    {
+        $params = '';
+
+        if($options->order){
+            $params .= " ORDER BY '".$options->order."'";
+        }
+
+        if($options->type_order){
+           // $params .= $options->type_order;
+        }
+
+        $sql = "SELECT * FROM users" . $params;
+        $connection = ConnectionDB::getConnection();
+        $stmt = $connection->query($sql);
+
+        if(!$response = $stmt->fetchAll(PDO::FETCH_OBJ)){
+            return false;
+        }
+
+        $userlist = new UserList();
+        foreach ($response as $user) {
+            $userlist->addUser(new User($user));
+        }
+
+        return $userlist;
+    }
 
     public static function inative(int $user_id): int|false
     {
@@ -71,17 +105,7 @@ class UserRepository extends ConnectionDB
         return $stmt;
     }
 
-    public static function all():array|bool
-    {
-        $sql = "SELECT * FROM users";
-
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->query($sql);
-
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    public static function get(int $id): object|bool
+    public static function get(int $id): User|bool
     {
         $sql = "SELECT * from users WHERE user_id = {$id}";
 

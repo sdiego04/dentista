@@ -2,19 +2,19 @@
 
 namespace app\Helpers;
 
+use app\Collections\UserList;
 use app\Models\User;
 use stdClass;
 
 class UserHelper {
 
-    public function buildDataBatchObject(array $users):array
+    public function buildDataBatchObject(UserList $userlist):array
     {
         $return_data = array();
-        
-        foreach ($users as $key => $value) {
-            $return_data[$key] = $this->buildDataObject(new User($value));
-        }
 
+        for ($i=0; $i < $userlist->length(); $i++) { 
+            $return_data[$i] = $this->buildDataObject($userlist->getUser($i));
+        }
         return $return_data;
     }
 

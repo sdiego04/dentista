@@ -20,7 +20,7 @@ class UserAddress{
         $this->setUserId($user->getUserId());
         $this->setState($state);
         $this->setCity($city);
-    }
+    } 
 
     /**
      * Get the value of user_address_id
