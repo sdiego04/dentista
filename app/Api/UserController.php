@@ -25,7 +25,6 @@ class UserController {
         }
 
         $list = $this->user_helper->buildDataBatchObject($list);
-
         response(200, true, $list, 'Consulta realizada com sucesso!');
     }
 
