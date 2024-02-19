@@ -36,18 +36,45 @@ class UserList{
         }
     }
 
-    public function length() {
+    public function length():int 
+    {
         return count($this->items);
     }
 
-    public function paginate(int $page_number)
+    public function paginate(int $page_number = 1)
     {
         if(empty($this->length()) || $this->length() == 0){
-            throw new Exception("Array vazio");
+            throw new Exception("Lista vazia");
         }
 
+        $page_size = 10;
+        $offset = ceil($this->length() / $page_size);
+        $array = array_chunk($this->items, $page_size, true);
 
-        return UserList::class;
+        $userlist = new UserList();
+        foreach ($array[$page_number - 1] as $user) {
+            $userlist->addUser($user);
+        }
+
+        return $userlist;
+    }
+
+    //TODO
+    public function deleteItem($key) {
+        if (isset($this->items[$key])) {
+            unset($this->items[$key]);
+        }
+        else {
+           // throw new KeyInvalidException("Invalid key $key.");
+        }
+    }
+    //TODO
+    public function keys() {
+        return array_keys($this->items);
+    }
+    //TODO
+    public function keyExists($key) {
+        return isset($this->items[$key]);
     }
 
 }

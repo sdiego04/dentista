@@ -23,9 +23,8 @@ class UserRepository extends ConnectionDB
     public static function all(stdClass $options = null):UserList|bool
     {
         $params = '';
-
         if($options->order){
-            $params .= " ORDER BY '".$options->order."'";
+           // $params .= " ORDER BY '".$options->order."'";
         }
 
         if($options->type_order){
@@ -39,12 +38,12 @@ class UserRepository extends ConnectionDB
         if(!$response = $stmt->fetchAll(PDO::FETCH_OBJ)){
             return false;
         }
-
+      
         $userlist = new UserList();
         foreach ($response as $user) {
             $userlist->addUser(new User($user));
         }
-
+        
         return $userlist;
     }
 

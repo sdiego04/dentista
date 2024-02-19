@@ -7,7 +7,8 @@
         "files": [
             "app/Helpers/ApiHelper.php",
             "app/Helpers/RouterHelper.php",
-            "app/Helpers/Debug.php"
+            "app/Helpers/Debug.php",
+            "app/Helpers/Language.php"
         ]
     },
     "authors": [

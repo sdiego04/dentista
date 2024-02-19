@@ -18,14 +18,22 @@ class UserController {
         $this->user_helper = new UserHelper();    
     }
 
+    /**
+     * @property int paginate
+     */
     public function index(stdClass $options)
     {   
-        if(!$list = UserRepository::all($options)){
-            response(204, false, '', 'Nenhum usuario encontrado!');
+        if(!isset($options->paginate)){
+            $options->paginate = 1;
         }
 
+        if(!$list = UserRepository::all($options)->paginate($options->paginate)){
+            response(204, false, '', get_string('user_not_found'));
+        }
+        
         $list = $this->user_helper->buildDataBatchObject($list);
-        response(200, true, $list, 'Consulta realizada com sucesso!');
+
+        response(200, true, $list, get_string('consult_success'));
     }
 
     public function get(stdClass $params)
@@ -35,7 +43,7 @@ class UserController {
         }
 
         if(!$user = UserRepository::get($params->id)){
-            response(204, false, '', 'Nenhum usuario encontrado!');
+            response(204, false, '', get_string('user_not_found'));
         }
 
         $build_user = $this->user_helper->buildDataObject($user);
@@ -68,7 +76,7 @@ class UserController {
         }
        
         if(!$user = UserRepository::get($params->user_id)){
-            response(204, false, '', 'Nenhum usuario encontrado!');
+            response(204, false, '', get_string('user_not_found'));
         }
 
         if(!UserRepository::update(new User($params))){
@@ -81,7 +89,7 @@ class UserController {
     public function inative(int $user_id)
     {
         if(!$user = UserRepository::get($user_id)){
-            response(204, false, '', 'Nenhum usuario encontrado!');
+            response(204, false, '', get_string('user_not_found'));
         }
 
         if(!UserRepository::inative($user_id)){

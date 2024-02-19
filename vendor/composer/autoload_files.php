@@ -9,4 +9,5 @@ return array(
     'dfc50296b887e2b5ec3d2b4cc879c4d3' => $baseDir . '/app/Helpers/ApiHelper.php',
     '14eb4ada069ed6dd8fb3f62c80da8ebf' => $baseDir . '/app/Helpers/RouterHelper.php',
     'f60a033d28e33246ee1aaee9ea94a5dd' => $baseDir . '/app/Helpers/Debug.php',
+    '4f907f86d3cee6dd2fc642c7eaa85243' => $baseDir . '/app/Helpers/Language.php',
 );
