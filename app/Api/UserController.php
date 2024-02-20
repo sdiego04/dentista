@@ -31,9 +31,9 @@ class UserController {
             response(204, false, '', get_string('user_not_found'));
         }
         
-        $list = $this->user_helper->buildDataBatchObject($list);
+        $userlist = $this->user_helper->buildDataBatchObject($list);
 
-        response(200, true, $list, get_string('consult_success'));
+        response(200, true, $userlist, get_string('consult_success'), $list->getOptions());
     }
 
     public function get(stdClass $params)

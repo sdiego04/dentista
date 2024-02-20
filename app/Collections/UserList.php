@@ -5,10 +5,14 @@ namespace app\Collections;
 
 use app\Models\User;
 use Exception;
+use stdClass;
 
-class UserList{
+class UserList implements Collection{
 
     private array $items = [];
+    private int $offset;
+    private stdClass $options;
+    private int $actual_page;
 
     public function __construct() {}
 
@@ -56,6 +60,8 @@ class UserList{
             $userlist->addUser($user);
         }
 
+        $userlist->setActualPage($page_number);
+        $userlist->setOffset($offset);
         return $userlist;
     }
 
@@ -77,6 +83,57 @@ class UserList{
         return isset($this->items[$key]);
     }
 
+
+    /**
+     * Get the value of offset
+     */
+    public function getOffset(): int
+    {
+        return $this->offset;
+    }
+
+    /**
+     * Set the value of offset
+     */
+    public function setOffset(int $offset): self
+    {
+        $this->offset = $offset;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of options
+     */
+    public function getOptions(): stdClass
+    {   
+        $options = new stdClass();
+        $options->pages = $this->getOffset();
+        $options->rows = $this->length();
+        $options->page = $this->getActualPage();
+
+        $this->options = $options;
+
+        return $this->options;
+    }
+
+    /**
+     * Get the value of actual_page
+     */
+    public function getActualPage(): int
+    {
+        return $this->actual_page;
+    }
+
+    /**
+     * Set the value of actual_page
+     */
+    public function setActualPage(int $actual_page): self
+    {
+        $this->actual_page = $actual_page;
+
+        return $this;
+    }
 }
 
 ?>
