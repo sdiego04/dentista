@@ -50,7 +50,7 @@ class UserController {
 
         response(200, true, $build_user, 'Consulta realizada com sucesso!');
     }
-
+    /*
     public function store(stdClass $params)
     {
         if(!isset($params->email) || empty($params->email)
@@ -84,7 +84,7 @@ class UserController {
         }
 
         response(200, true, '', 'Usuario alterado com sucesso!');
-    }
+    }*/
 
     public function inative(int $user_id)
     {

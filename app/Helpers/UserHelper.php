@@ -11,6 +11,10 @@ class UserHelper {
     public function buildDataBatchObject(UserList $userlist):array
     {
         $return_data = array();
+        
+        if($userlist->length() == 0){
+          return $return_data;
+        }
 
         for ($i=0; $i < $userlist->length(); $i++) { 
             $return_data[$i] = $this->buildDataObject($userlist->getUser($i));

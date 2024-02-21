@@ -23,25 +23,26 @@ class UserRepository extends ConnectionDB
     public static function all(stdClass $options = null):UserList|bool
     {
         $params = '';
-        if($options->order){
+        if(isset($options->order) && !empty($options->order)){
            // $params .= " ORDER BY '".$options->order."'";
         }
 
-        if($options->type_order){
+        if(isset($options->type_order) && !empty($options->type_order)){
            // $params .= $options->type_order;
         }
 
         $sql = "SELECT * FROM users" . $params;
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->query($sql);
-
+        
         if(!$response = $stmt->fetchAll(PDO::FETCH_OBJ)){
             return false;
         }
-      
+
         $userlist = new UserList();
+    
         foreach ($response as $user) {
-            $userlist->addUser(new User($user));
+           $userlist->addUser(new User($user));
         }
         
         return $userlist;
@@ -68,7 +69,7 @@ class UserRepository extends ConnectionDB
         return $stmt;
     }
 
-
+    /*
     public static function update(User $user): int|false
     {
         $sql = "UPDATE users 
@@ -102,7 +103,7 @@ class UserRepository extends ConnectionDB
         $stmt = $connection->exec($sql);
 
         return $stmt;
-    }
+    }*/
 
     public static function get(int $id): User|bool
     {

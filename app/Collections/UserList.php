@@ -29,6 +29,7 @@ class UserList implements Collection{
                 $this->items[$key] = $user;
             }
         }
+        
     }
 
     public function getUser($key) {

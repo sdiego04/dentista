@@ -11,8 +11,8 @@ use stdClass;
 class User {
 
     private int $user_id;
-    private Profile $profile;
-    private TypePerson $type_person;
+    private int $profile;
+    private int $type_person;
     private string $name;
     private string $lastname;
     private ?string $fantasy_name;
@@ -33,8 +33,8 @@ class User {
                 $this->setUserId($user->user_id);
             }
 
-            $this->setProfile(new Profile($user->profile_id));
-            $this->setTypePerson(new TypePerson($user->type_person_id));
+            $this->setProfile($user->profile_id);
+            $this->setTypePerson($user->type_person_id);
             $this->setName($user->name);
             $this->setLastName($user->lastname);
             $this->setFantasyName($user->fantasy_name);
@@ -195,24 +195,6 @@ class User {
     }
 
     /**
-     * Get the value of profile
-     */
-    public function getProfile(): Profile
-    {
-        return $this->profile;
-    }
-
-    /**
-     * Set the value of profile
-     */
-    public function setProfile(Profile $profile): self
-    {
-        $this->profile = $profile;
-
-        return $this;
-    }
-
-    /**
      * Get the value of email
      */
     public function getEmail(): Email
@@ -284,23 +266,6 @@ class User {
         return $this;
     }
 
-    /**
-     * Get the value of type_person
-     */
-    public function getTypePerson(): TypePerson
-    {
-        return $this->type_person;
-    }
-
-    /**
-     * Set the value of type_person
-     */
-    public function setTypePerson(TypePerson $type_person): self
-    {
-        $this->type_person = $type_person;
-
-        return $this;
-    }
 
     /**
      * Get the value of password
@@ -316,6 +281,42 @@ class User {
     public function setPassword(Password $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of profile
+     */
+    public function getProfile(): int
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set the value of profile
+     */
+    public function setProfile(int $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of type_person
+     */
+    public function getTypePerson(): int
+    {
+        return $this->type_person;
+    }
+
+    /**
+     * Set the value of type_person
+     */
+    public function setTypePerson(int $type_person): self
+    {
+        $this->type_person = $type_person;
 
         return $this;
     }

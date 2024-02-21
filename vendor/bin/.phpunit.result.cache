@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Warning":6,"app\\Api\\UserControllerTeste::test_index":4,"app\\Api\\UserControllerTeste::tests_index":4,"app\\Api\\UserControllerTest::test_index":3},"times":{"Warning":0.001,"app\\Api\\UserControllerTeste::test_index":0.002,"app\\Api\\UserControllerTeste::tests_index":0.001,"app\\Api\\UserControllerTest::test_index":0.916}}
