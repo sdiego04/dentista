@@ -4,6 +4,8 @@
 namespace app\Services;
 
 use PDO;
+const DESC = 1;
+const ASC = 0;
 
 abstract class ConnectionDB extends PDO{
 

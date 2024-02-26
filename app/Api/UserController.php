@@ -19,15 +19,15 @@ class UserController {
     }
 
     /**
-     * @property int paginate
+     * @property int page
      */
     public function index(stdClass $options)
     {   
-        if(!isset($options->paginate)){
-            $options->paginate = 1;
+        if(!isset($options->page)){
+            $options->page = 1;
         }
 
-        if(!$list = UserRepository::all($options)->paginate($options->paginate)){
+        if(!$list = UserRepository::all($options)->paginate($options->page)){
             response(204, false, '', get_string('user_not_found'));
         }
         

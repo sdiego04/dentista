@@ -10,6 +10,9 @@ use app\Services\ConnectionDB;
 use PDO;
 use stdClass;
 
+use const app\Services\ASC;
+use const app\Services\DESC;
+
 class UserRepository extends ConnectionDB
 {
 
@@ -24,23 +27,28 @@ class UserRepository extends ConnectionDB
     {
         $params = '';
         if(isset($options->order) && !empty($options->order)){
-           // $params .= " ORDER BY '".$options->order."'";
+             $params .= " ORDER BY ".$options->order."";
         }
+        
+        if(isset($options->type_order) && is_int($options->type_order)){
+            if($options->type_order == DESC){
+                $params .= " DESC";
+            }
 
-        if(isset($options->type_order) && !empty($options->type_order)){
-           // $params .= $options->type_order;
+            if($options->type_order == ASC){
+                $params .= " ASC";
+            }
         }
 
         $sql = "SELECT * FROM users" . $params;
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->query($sql);
-        
+     
         if(!$response = $stmt->fetchAll(PDO::FETCH_OBJ)){
             return false;
         }
-
+        
         $userlist = new UserList();
-    
         foreach ($response as $user) {
            $userlist->addUser(new User($user));
         }

@@ -26,6 +26,7 @@ class UserHelper {
     {
         $object_user = new stdClass();
 
+        $object_user->id = $user->getUserId();
         $object_user->name = $user->getName();
         $object_user->lastname = $user->getLastName();
         $object_user->fullname = $user->getName() . " " . $user->getLastName();
