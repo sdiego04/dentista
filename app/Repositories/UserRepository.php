@@ -25,22 +25,7 @@ class UserRepository extends ConnectionDB
      */
     public static function all(stdClass $options = null):UserList|bool
     {
-        $params = '';
-        if(isset($options->order) && !empty($options->order)){
-             $params .= " ORDER BY ".$options->order."";
-        }
-        
-        if(isset($options->type_order) && is_int($options->type_order)){
-            if($options->type_order == DESC){
-                $params .= " DESC";
-            }
-
-            if($options->type_order == ASC){
-                $params .= " ASC";
-            }
-        }
-
-        $sql = "SELECT * FROM users" . $params;
+        $sql = "SELECT * FROM users" . build_sql($options);
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->query($sql);
      

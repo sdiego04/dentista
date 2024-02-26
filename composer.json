@@ -8,7 +8,8 @@
             "app/Helpers/ApiHelper.php",
             "app/Helpers/RouterHelper.php",
             "app/Helpers/Debug.php",
-            "app/Helpers/Language.php"
+            "app/Helpers/Language.php",
+            "app/Helpers/SqlHelper.php"
         ]
     },
     "authors": [

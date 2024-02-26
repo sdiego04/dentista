@@ -12,4 +12,5 @@ return array(
     '14eb4ada069ed6dd8fb3f62c80da8ebf' => $baseDir . '/app/Helpers/RouterHelper.php',
     'f60a033d28e33246ee1aaee9ea94a5dd' => $baseDir . '/app/Helpers/Debug.php',
     '4f907f86d3cee6dd2fc642c7eaa85243' => $baseDir . '/app/Helpers/Language.php',
+    'bdf457cbe56a826afb3c173753e90204' => $baseDir . '/app/Helpers/SqlHelper.php',
 );

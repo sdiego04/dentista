@@ -1,8 +1,8 @@
 <?php
 
+require_once '../app/Core/Environment.php';
 require_once '../routes/router.php';
 require_once '../vendor/autoload.php';
-
 
 try {
 
