@@ -16,7 +16,7 @@ class UserList implements Collection{
 
     public function __construct() {}
 
-    public function addUser(User $user, $key = null)
+    public function addItem(User $user, $key = null)
     {    
         if ($key == null) {
             $this->items[] = $user;
@@ -58,7 +58,7 @@ class UserList implements Collection{
 
         $userlist = new UserList();
         foreach ($array[$page_number - 1] as $user) {
-            $userlist->addUser($user);
+            $userlist->addItem($user);
         }
 
         $userlist->setActualPage($page_number);
@@ -66,24 +66,22 @@ class UserList implements Collection{
         return $userlist;
     }
 
-    //TODO
     public function deleteItem($key) {
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
         }
         else {
-           // throw new KeyInvalidException("Invalid key $key.");
+           throw new Exception("Invalid key $key.its not possible user delete");
         }
     }
-    //TODO
+
     public function keys() {
         return array_keys($this->items);
     }
-    //TODO
+
     public function keyExists($key) {
         return isset($this->items[$key]);
     }
-
 
     /**
      * Get the value of offset

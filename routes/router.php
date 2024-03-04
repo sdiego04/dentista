@@ -28,6 +28,8 @@ $routes = [
     ],
     'PATCH' => [
         '/api/user'  => fn () => loadApi('UserController', 'update'),
+        '/api/user/inative'  => fn () => loadApi('UserController', 'inative'),
+        '/api/user/activate'  => fn () => loadApi('UserController', 'activate'),
     ]
 ];
 

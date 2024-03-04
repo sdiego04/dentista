@@ -4,9 +4,15 @@
 const DESC = 1;
 const ASC = 0;
 
+
+/**
+ * @property string order
+ * @property int type_order
+ */
 function build_sql(stdClass $options):string
 {   
     $params = '';
+    
     if (isset($options->order) && !empty($options->order)) {
         $params .= " ORDER BY " . $options->order . "";
     }

@@ -2,16 +2,12 @@
 
 namespace app\Repositories;
 
-use app\BaseRepositories\BaseUser;
 use app\Collections\UserList;
 use app\Models\Email;
 use app\Models\User;
 use app\Services\ConnectionDB;
 use PDO;
 use stdClass;
-
-use const app\Services\ASC;
-use const app\Services\DESC;
 
 class UserRepository extends ConnectionDB
 {
@@ -35,7 +31,7 @@ class UserRepository extends ConnectionDB
         
         $userlist = new UserList();
         foreach ($response as $user) {
-           $userlist->addUser(new User($user));
+           $userlist->addItem(new User($user));
         }
         
         return $userlist;
@@ -43,8 +39,7 @@ class UserRepository extends ConnectionDB
 
     public static function inative(int $user_id): int|false
     {
-        $sql = "UPDATE users SET status = 0 WHERE user_id = " . $user_id;
-
+        $sql = "UPDATE users SET status = 0,  updated_at = '".date('Y-m-d H:i:s')."' WHERE user_id = " . $user_id;
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 
@@ -54,7 +49,7 @@ class UserRepository extends ConnectionDB
 
     public static function activate(int $user_id): int|false
     {
-        $sql = "UPDATE users SET status = 1 WHERE user_id = " . $user_id;
+        $sql = "UPDATE users SET status = 1 ,  updated_at = '".date('Y-m-d H:i:s')."' WHERE user_id = " . $user_id;
 
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
@@ -79,24 +74,24 @@ class UserRepository extends ConnectionDB
         $stmt = $connection->exec($sql);
 
         return $stmt;
-    }
+    }*/
 
     public static function save(User $user): int|false
     {
         $sql = "INSERT INTO users (type_person_id, profile_id, name, lastname,
                 fantasy_name, cpf,cnpj, email, password, parent_id, cro, gender,
                 birth_date, status, created_at) 
-                VALUES (".$user->getTypePerson()->getTypePersonId().", ".$user->getProfile()->getId().",
+                VALUES (".$user->getTypePerson().", ".$user->getProfile().",
                 '".$user->getName()."', '".$user->getLastName()."', '".$user->getFantasyName()."',
                 '".$user->getCpf()->getName()."', '".$user->getCnpj()->getName()."', '".$user->getEmail()->getName()."',
                 '".$user->getPassword()->getEncripty()."', ".$user->getParentId().",
                 '".$user->getCro()."', '".$user->getGender()."', '".$user->getBirthDate()."', ".$user->getStatus().", '".date('Y-m-d H:i:s')."')";
-
+       
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 
         return $stmt;
-    }*/
+    }
 
     public static function get(int $id): User|bool
     {
@@ -106,7 +101,7 @@ class UserRepository extends ConnectionDB
         $stmt = $connection->query($sql);
 
         $get_object = $stmt->fetch(PDO::FETCH_OBJ);
-
+        
         if (!$get_object) {
             return $get_object;
         }

@@ -9,9 +9,13 @@ function response(int $code, bool $status, $data, string $message = null, stdCla
     $response = new stdClass();
     $response->status = $status;
     $response->message = $message;
-    $response->data = $data;
-    $response->options = $options;
-
+    if(!empty($data)){
+        $response->data = $data;
+    }
+    if(!empty($options)){
+        $response->options = $options;
+    }
+   
     $json_response = json_encode($response);
     echo $json_response;
 

@@ -2,9 +2,7 @@
 
 namespace app\Api;
 
-use app\Collections\UserList;
 use app\Helpers\UserHelper;
-use app\Models\User;
 use app\Repositories\UserRepository;
 use PHPUnit\Framework\TestCase;
 use stdClass;

@@ -12,7 +12,7 @@ try {
     if(!isset($routes[$request])){
         throw new Exception("tipo de metodo invalido", 1);
     }
-
+    
     if(!array_key_exists($uri, $routes[$request])){
         throw new Exception("Rota invalida", 1);  
     }
