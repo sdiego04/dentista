@@ -38,10 +38,14 @@ class UserController {
         response(200, true, $userlist, get_string('consult_success'), $list->getOptions());
     }
 
-    public function get(stdClass $params)
+    public function get($params)
     {   
         if(!isset($params->id) || empty($params->id)){
             response(400, false, '', 'Nenhum parametro informado!');
+        }
+
+        if(!is_numeric($params->id)){
+            response(400, false, '', 'Formato invalido!');
         }
 
         if(!$user = UserRepository::get($params->id)){
@@ -71,7 +75,7 @@ class UserController {
         response(200, true, '', 'Usuario salvo com sucesso!');
     }
 
-    /*
+    
     public function update(stdClass $params)
     {  
         if(!isset($params->user_id) || empty($params->user_id)){
@@ -87,7 +91,7 @@ class UserController {
         }
 
         response(200, true, '', 'Usuario alterado com sucesso!');
-    }*/
+    }
 
 
 
