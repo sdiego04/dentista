@@ -3,7 +3,6 @@
 use Slim\Factory\AppFactory;
 
 require_once '../app/Core/Environment.php';
-require_once '../routes/router.php';
 require_once '../vendor/autoload.php';
 
 try {
@@ -11,7 +10,7 @@ try {
     $app = AppFactory::create();
     $app->group('/api/user', function(\Slim\Routing\RouteCollectorProxy $app){
         $app->post('', '\app\Api\UserController:index');
-        //...
+        $app->get('/{id}',  '\app\Api\UserController:get');
     });
     $app->run();
 

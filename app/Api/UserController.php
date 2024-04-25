@@ -6,7 +6,7 @@ namespace app\Api;
 use app\Helpers\UserHelper;
 use app\Models\User;
 use app\Repositories\UserRepository;
-use SensitiveParameterValue;
+use GuzzleHttp\Psr7\ServerRequest;
 use stdClass;
 
 class UserController {
@@ -24,9 +24,10 @@ class UserController {
      * @property int type_order 0 ASC/1 = DESC
      */
     public function index()
-    {   $data = json_decode(file_get_contents('php://input'), true);
-        print_r($data);die;
+    {   
         $options = new stdClass();
+        $options = json_decode(file_get_contents('php://input'));
+
         if(!isset($options->page) || $options->page <= 0 || !is_numeric($options->page)){
             $options->page = 1;
         }
@@ -40,17 +41,18 @@ class UserController {
         response(200, true, $userlist, get_string('consult_success'), $list->getOptions());
     }
 
-    public function get($params)
+    public function get(ServerRequest $resquest)
     {   
-        if(!isset($params->id) || empty($params->id)){
+        $id = $resquest->getAttribute('id');
+        if(!isset($id) || empty($id)){
             response(400, false, '', 'Nenhum parametro informado!');
         }
 
-        if(!is_numeric($params->id)){
+        if(!is_numeric($id)){
             response(400, false, '', 'Formato invalido!');
         }
 
-        if(!$user = UserRepository::get($params->id)){
+        if(!$user = UserRepository::get($id)){
             response(204, false, '', get_string('user_not_found'));
         }
 
