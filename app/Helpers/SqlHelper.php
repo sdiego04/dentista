@@ -1,8 +1,11 @@
 <?php
 
-
 const DESC = 1;
 const ASC = 0;
+const CREATE = 'create';
+const READ = 'read';
+const UPDATE = 'update';
+const DELETE = 'delete';
 
 
 /**

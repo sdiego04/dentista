@@ -18,6 +18,7 @@ class User {
     private ?string $fantasy_name;
     private Email $email;
     private Password $password;
+    private ?Cnpj $cnpj;
     private ?Cpf $cpf;
     private ?int $parent_id;
     private string $cro;
@@ -39,8 +40,9 @@ class User {
             $this->setFantasyName($user->fantasy_name);
             $this->setEmail(new Email($user->email));
             $this->setPassword(new Password($user->password));
+            $this->setCnpj(new Cnpj($user->cnpj));
             $this->setCpf(new Cpf($user->cpf));
-            $this->setParentId($user->parent_id);
+            $this->setParentId(empty($user->parent_id) ?? null);
             $this->setCro($user->cro);
             $this->setGender($user->gender);
             $this->setBirthDate($user->birth_date);
@@ -210,6 +212,23 @@ class User {
         return $this;
     }
 
+    /**
+     * Get the value of cnpj
+     */
+    public function getCnpj(): ?Cnpj
+    {
+        return $this->cnpj;
+    }
+
+    /**
+     * Set the value of cnpj
+     */
+    public function setCnpj(?Cnpj $cnpj): self
+    {
+        $this->cnpj = $cnpj;
+
+        return $this;
+    }
 
     /**
      * Get the value of cpf

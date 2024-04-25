@@ -9,7 +9,8 @@
             "app/Helpers/RouterHelper.php",
             "app/Helpers/Debug.php",
             "app/Helpers/Language.php",
-            "app/Helpers/SqlHelper.php"
+            "app/Helpers/SqlHelper.php",
+            "app/Helpers/UserSqlHelper.php"
         ]
     },
     "authors": [
@@ -19,7 +20,13 @@
         }
     ],
     "require": {
-        "league/plates": "^3.5"
+        "league/plates": "^3.5",
+        "slim/psr7": "^1.6",
+        "nyholm/psr7": "^1.8",
+        "nyholm/psr7-server": "^1.1",
+        "guzzlehttp/psr7": "^1",
+        "sapphirecat/slim4-http-interop-adapter": "^1.1",
+        "laminas/laminas-diactoros": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"

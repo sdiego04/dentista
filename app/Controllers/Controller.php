@@ -26,8 +26,8 @@ class Controller{
 
     public function redirect(string $routename, string $method):void
     {
-       $redirect = new RouterHelper();
-       $redirect->redirect($routename, $method);
+       //$redirect = new RouterHelper();
+       //$redirect->redirect($routename, $method);
     }
 }
 

@@ -6,7 +6,7 @@ namespace app\Api;
 use app\Helpers\UserHelper;
 use app\Models\User;
 use app\Repositories\UserRepository;
-
+use SensitiveParameterValue;
 use stdClass;
 
 class UserController {
@@ -23,8 +23,10 @@ class UserController {
      * @property int page
      * @property int type_order 0 ASC/1 = DESC
      */
-    public function index(stdClass $options)
-    {   
+    public function index()
+    {   $data = json_decode(file_get_contents('php://input'), true);
+        print_r($data);die;
+        $options = new stdClass();
         if(!isset($options->page) || $options->page <= 0 || !is_numeric($options->page)){
             $options->page = 1;
         }
@@ -98,8 +100,8 @@ class UserController {
     /**
      * @property int userid
      */
-    public function inative(stdClass $params)
-    {   
+    public function inative()
+    {    $params = new stdClass();
         if(!isset($params->userid) || empty($params->userid)){
             response(400, false, '', 'erro ao enviar os parametros obrigatorios');
         }

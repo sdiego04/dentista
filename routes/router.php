@@ -23,12 +23,13 @@ $routes = [
         '/type-contact-actived/' => fn () => load('TypeContactController', 'actived'),
         '/type-contact-delete/' => fn () => load('TypeContactController', 'delete'),
         '/api/user/'  => fn () => loadApi('UserController', 'get'),
+        '/api/user/inative/$1'  => fn () => loadApi('UserController', 'inative'),
         '/api/user'  => fn () => loadApi('UserController', 'index'),
         '/api/user-address'  => fn () => loadApi('UserAddressController', 'index'),
     ],
     'PATCH' => [
         '/api/user'  => fn () => loadApi('UserController', 'update'),
-        '/api/user/inative'  => fn () => loadApi('UserController', 'inative'),
+       // '/api/user/inative'  => fn () => loadApi('UserController', 'inative'),
         '/api/user/activate'  => fn () => loadApi('UserController', 'activate'),
     ]
 ];
@@ -92,7 +93,6 @@ function loadApi(string $controller, string $action){
     }
 
 }
-
 
 function getRouters():array
 {
