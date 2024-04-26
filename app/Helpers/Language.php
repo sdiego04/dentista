@@ -12,8 +12,18 @@ function get_string(string $word):string
 
 
 function getString(){
+    //---- BEGIN USER ------
     $string['user_not_found'] =  'Nenhum usuario encontrado!';
     $string['consult_success'] = 'Consulta realizada com sucesso!';
+    $string['warning:user_exist'] = 'Usuario ja existe, favor entrar em contato com o suporte';
+    $string['error:require_send_params'] = 'Erro ao enviar os parametros obrigatorios';
+    $string['error:inative_user'] = 'Houve um erro ao inativar o usuario, favor entrar em contato com o suporte';
+    $string['error:activate_user'] = 'Houve um erro ao ativar o usuario, favor entrar em contato com o suporte';
+    $string['error:save_user'] = 'Houve um erro ao salvar, favor entrar em contato com o suporte';
+    $string['success:inative_user'] = 'Usuario inativado com sucesso!';
+    $string['success:activate_user'] = 'Usuario ativado com sucesso!';
+    $string['sucess:save_user'] = 'Usuario salvo com sucesso!';
+    //---- END USER ------
 
     return $string;
 }

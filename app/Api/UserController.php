@@ -3,20 +3,17 @@
 
 namespace app\Api;
 
-use app\Helpers\UserHelper;
 use app\Models\User;
 use app\Repositories\UserRepository;
 use GuzzleHttp\Psr7\ServerRequest;
 use stdClass;
 
+use function app\Helpers\buildDataBatchObject;
+use function app\Helpers\buildDataObject;
+
 class UserController {
 
-    private UserHelper $user_helper;
-
-    public function __construct()
-    {
-        $this->user_helper = new UserHelper();    
-    }
+    public function __construct(){}
 
    /**
      * @property string order
@@ -36,7 +33,7 @@ class UserController {
             response(204, false, '', get_string('user_not_found'));
         }
         
-        $userlist = $this->user_helper->buildDataBatchObject($list);
+        $userlist = buildDataBatchObject($list);
 
         response(200, true, $userlist, get_string('consult_success'), $list->getOptions());
     }
@@ -56,27 +53,30 @@ class UserController {
             response(204, false, '', get_string('user_not_found'));
         }
 
-        $build_user = $this->user_helper->buildDataObject($user);
+        $build_user = buildDataObject($user);
 
         response(200, true, $build_user, 'Consulta realizada com sucesso!');
     }
     
-    public function store(stdClass $params)
+    public function store()
     {
+        $params = new stdClass();
+        $params = json_decode(file_get_contents('php://input'));
+ 
         if(!isset($params->email) || empty($params->email)
             || !isset($params->cpf) || empty($params->cpf)){
-            response(400, false, '', 'Ha parametros faltando, favor verifique');
+            response(400, false, '', get_string('error:require_send_params'));
         }
 
         if(UserRepository::check_user_exist($params)){
-            response(400, false, '', 'Usuario ja existe, favor entrar em contato com o suporte');
+            response(400, false, '', get_string('warning:user_exist'));
         }
 
         if(!UserRepository::save(new User($params))){
-            response(404, false, '', 'Houve um erro ao salvar, favor entrar em contato com o suporte');
+            response(404, false, '', get_string('error:save_user'));
         }
 
-        response(200, true, '', 'Usuario salvo com sucesso!');
+        response(200, true, '', get_string('sucess:save_user'));
     }
 
     
@@ -100,44 +100,46 @@ class UserController {
 
 
     /**
-     * @property int userid
+     * @property int id
      */
-    public function inative()
-    {    $params = new stdClass();
-        if(!isset($params->userid) || empty($params->userid)){
-            response(400, false, '', 'erro ao enviar os parametros obrigatorios');
+    public function inative(ServerRequest $resquest)
+    {   
+        $userid = $resquest->getAttribute('id');
+        if(!isset($userid) || empty($userid)){
+            response(400, false, '', get_string('error:require_send_params'));
         }
 
-        if(!$user = UserRepository::get($params->userid)){
+        if(!$user = UserRepository::get($userid)){
             response(204, false, '', get_string('user_not_found'));
         }
         
-        if(!UserRepository::inative($params->userid)){
-            response(400, false, '', 'Houve um erro ao inativar o usuario, favor entrar em contato com o suporte');
+        if(!UserRepository::inative($userid)){
+            response(400, false, '', get_string('error:inative_user'));
         }
 
-        response(200, true, '', 'Usuario inativado com sucesso!');
+        response(200, true, '', get_string('success:inative_user'));
     }
 
 
     /**
-     * @property int userid
+     * @property int id
      */
-    public function activate(stdClass $params)
+    public function activate(ServerRequest $resquest)
     {   
-        if(!isset($params->userid) || empty($params->userid)){
-            response(400, false, '', 'erro ao enviar os parametros obrigatorios');
+        $userid = $resquest->getAttribute('id');
+        if(!isset($userid) || empty($userid)){
+            response(400, false, '', get_string('error:require_send_params'));
         }
 
-        if(!$user = UserRepository::get($params->userid)){
+        if(!$user = UserRepository::get($userid)){
             response(204, false, '', get_string('user_not_found'));
         }
         
-        if(!UserRepository::activate($params->userid)){
-            response(400, false, '', 'Houve um erro ao ativar o usuario, favor entrar em contato com o suporte');
+        if(!UserRepository::activate($userid)){
+            response(400, false, '', get_string('error:activate_user'));
         }
 
-        response(200, true, '', 'Usuario ativado com sucesso!');
+        response(200, true, '', get_string('success:activate_user'));
     }
 
 }

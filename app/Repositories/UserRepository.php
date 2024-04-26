@@ -9,6 +9,7 @@ use app\Services\ConnectionDB;
 use PDO;
 use stdClass;
 
+
 class UserRepository extends ConnectionDB
 {
     public function __construct(){}
@@ -38,22 +39,33 @@ class UserRepository extends ConnectionDB
 
     public static function inative(int $user_id): int|false
     {
-        $sql = "UPDATE users SET status = 0,  updated_at = '".date('Y-m-d H:i:s')."' WHERE user_id = " . $user_id;
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+        try {
 
-        return $stmt;
+            $sql = "UPDATE users SET status = 0,  updated_at = '".date('Y-m-d H:i:s')."' WHERE user_id = " . $user_id;
+            $connection = ConnectionDB::getConnection();
+            $stmt = $connection->exec($sql);
+    
+            return $stmt;
+
+        } catch (\Throwable $th) {
+           $th->getMessage();
+        }
+
     }
 
 
     public static function activate(int $user_id): int|false
-    {
-        $sql = "UPDATE users SET status = 1 ,  updated_at = '".date('Y-m-d H:i:s')."' WHERE user_id = " . $user_id;
+    {   
+        try {
+            $sql = "UPDATE users SET status = 1 ,  updated_at = '".date('Y-m-d H:i:s')."' WHERE user_id = " . $user_id;
 
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
-
-        return $stmt;
+            $connection = ConnectionDB::getConnection();
+            $stmt = $connection->exec($sql);
+    
+            return $stmt;
+        } catch (\Throwable $th) {
+            $th->getMessage();
+        }
     }
 
     
@@ -69,12 +81,16 @@ class UserRepository extends ConnectionDB
 
     public static function save(User $user): int|false
     {
-        $sql = build_user_sql(CREATE, $user);
+        try {
+            $sql = build_user_sql(CREATE, $user);
+            $connection = ConnectionDB::getConnection();
+            $stmt = $connection->exec($sql);
 
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+            return $stmt;
 
-        return $stmt;
+        } catch (\Throwable $th) {
+            $th->getMessage();
+        }
     }
 
     public static function get(int $id): User|bool

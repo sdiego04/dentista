@@ -7,6 +7,7 @@ function build_user_sql(string $action, User $user):string
     if($action == CREATE){
         $sql = build_insert_sql($user);
     }
+
     if($action == READ){}
     if($action == UPDATE){}
     if($action == DELETE){}
@@ -16,7 +17,7 @@ function build_user_sql(string $action, User $user):string
 
 function build_insert_sql(User $user):string
 {   
-
+   
     $sql = "INSERT INTO users (type_person_id, profile_id, name, lastname,
         fantasy_name, cpf,cnpj, email, password, parent_id, cro, gender,
         birth_date, status, created_at) 

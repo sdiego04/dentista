@@ -4,9 +4,9 @@
 namespace app\Models;
 
 use app\Models\Email;
-use app\Models\Profile;
 use app\Types\Password;
 use stdClass;
+
 
 class User {
 
@@ -18,7 +18,7 @@ class User {
     private ?string $fantasy_name;
     private Email $email;
     private Password $password;
-    private ?Cnpj $cnpj;
+    private ?Cnpj $cnpj = null;
     private ?Cpf $cpf;
     private ?int $parent_id;
     private string $cro;
@@ -40,8 +40,17 @@ class User {
             $this->setFantasyName($user->fantasy_name);
             $this->setEmail(new Email($user->email));
             $this->setPassword(new Password($user->password));
-            $this->setCnpj(new Cnpj($user->cnpj));
-            $this->setCpf(new Cpf($user->cpf));
+
+            if($user->type_person_id == LEGAL_PERSON){
+                $this->setCnpj(new Cnpj($user->cnpj));
+                $this->setCpf(new Cpf($user->cpf));
+            }
+            
+            if($user->type_person_id == NATURAL_PERSON){
+                $this->setCpf(new Cpf($user->cpf));
+                $this->setCnpj(new Cnpj(null));
+            }
+     
             $this->setParentId(empty($user->parent_id) ?? null);
             $this->setCro($user->cro);
             $this->setGender($user->gender);
