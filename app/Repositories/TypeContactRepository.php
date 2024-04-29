@@ -2,7 +2,7 @@
 
 namespace app\Repositories;
 
-use app\Models\TypeContact;
+use app\Entity\TypeContact;
 use app\Services\ConnectionDB;
 use PDO;
 

@@ -3,7 +3,7 @@
 
 namespace app\Collections;
 
-use app\Models\User;
+use app\Entity\User;
 use Exception;
 use stdClass;
 

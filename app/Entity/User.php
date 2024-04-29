@@ -1,9 +1,9 @@
 <?php
 
 
-namespace app\Models;
+namespace app\Entity;
 
-use app\Models\Email;
+use app\Entity\Email;
 use app\Types\Password;
 use stdClass;
 

@@ -15,6 +15,11 @@ try {
         $app->get('/inative/{id}',  '\app\Api\UserController:inative');
         $app->get('/activate/{id}',  '\app\Api\UserController:activate');
     });
+
+    $app->group('/api/legal-person', function(\Slim\Routing\RouteCollectorProxy $app){
+        $app->post('', '\app\Api\LegalPersonController:save');
+        $app->get('/cnpj/{doc}',  '\app\Api\LegalPersonController:getForCnpj');
+    });
     $app->run();
 
 } catch (\Throwable $th) {

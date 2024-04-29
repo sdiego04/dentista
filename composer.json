@@ -12,6 +12,7 @@
             "app/Helpers/SqlHelper.php",
             "app/Helpers/UserSqlHelper.php",
             "app/Helpers/UserHelper.php",
+            "app/Helpers/LegalPersonHelper.php",
             "app/Core/Constants.php"
         ]
     },

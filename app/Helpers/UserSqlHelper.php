@@ -1,6 +1,6 @@
 <?php
 
-use app\Models\User;
+use app\Entity\User;
 
 function build_user_sql(string $action, User $user):string
 {   

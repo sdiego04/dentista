@@ -2,12 +2,12 @@
 
 namespace app\Controllers;
 
-use app\Models\Client;
-use app\Models\Cnpj;
-use app\Models\Email;
-use app\Models\Profile;
-use app\Models\TypeContact;
-use app\Models\TypePerson;
+use app\Entity\Client;
+use app\Entity\Cnpj;
+use app\Entity\Email;
+use app\Entity\Profile;
+use app\Entity\TypeContact;
+use app\Entity\TypePerson;
 use app\Repositories\ClientRepository;
 
 use app\Repositories\TypeContactRepository;

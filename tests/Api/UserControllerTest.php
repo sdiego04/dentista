@@ -5,7 +5,7 @@ namespace app\Api;
 use app\Helpers\UserHelper;
 use app\Repositories\UserRepository;
 use PHPUnit\Framework\TestCase;
-use app\Models\User;
+use app\Entity\User;
 use stdClass;
 
 class UserControllerTest extends TestCase {

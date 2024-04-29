@@ -1,5 +1,5 @@
 <?php
-namespace app\Models;
+namespace app\Entity;
 
 use app\Repositories\ProfileRepository;
 use stdClass;

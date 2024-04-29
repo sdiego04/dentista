@@ -3,7 +3,8 @@
 
 namespace app\Api;
 
-use app\Models\User;
+use app\Entity\User as EntityUser;
+use app\Entity\User;
 use app\Repositories\UserRepository;
 use GuzzleHttp\Psr7\ServerRequest;
 use stdClass;
@@ -72,14 +73,13 @@ class UserController {
             response(400, false, '', get_string('warning:user_exist'));
         }
 
-        if(!UserRepository::save(new User($params))){
+        if(!UserRepository::save(new EntityUser($params))){
             response(404, false, '', get_string('error:save_user'));
         }
 
-        response(200, true, '', get_string('sucess:save_user'));
+        response(200, true, '', get_string('success:save_user'));
     }
 
-    
     public function update(stdClass $params)
     {  
         if(!isset($params->user_id) || empty($params->user_id)){

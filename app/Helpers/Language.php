@@ -12,6 +12,13 @@ function get_string(string $word):string
 
 
 function getString(){
+    //---- BEGIN GENERIC ---
+    $string['success:registration'] = "Cadastro realizado com sucesso!";
+    $string['success:consult'] = "Consulta realizada com sucesso!";
+    $string['warning:not_consult'] = "Nenhum registro encontrado!";
+    $string['required:params'] = "Ha parametros faltando!";
+    //---- END GENERIC 
+
     //---- BEGIN USER ------
     $string['user_not_found'] =  'Nenhum usuario encontrado!';
     $string['consult_success'] = 'Consulta realizada com sucesso!';
@@ -22,7 +29,7 @@ function getString(){
     $string['error:save_user'] = 'Houve um erro ao salvar, favor entrar em contato com o suporte';
     $string['success:inative_user'] = 'Usuario inativado com sucesso!';
     $string['success:activate_user'] = 'Usuario ativado com sucesso!';
-    $string['sucess:save_user'] = 'Usuario salvo com sucesso!';
+    $string['success:save_user'] = 'Usuario salvo com sucesso!';
     //---- END USER ------
 
     return $string;

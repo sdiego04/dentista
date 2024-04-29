@@ -2,8 +2,8 @@
 
 namespace app\Repositories;
 
-use app\Models\Client;
-use app\Models\Email;
+use app\Entity\Client;
+use app\Entity\Email;
 use app\Services\ConnectionDB;
 use PDO;
 

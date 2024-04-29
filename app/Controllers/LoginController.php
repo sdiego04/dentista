@@ -2,7 +2,7 @@
 
 namespace app\Controllers;
 
-use app\Models\Email;
+use app\Entity\Email;
 use app\Repositories\UserRepository;
 use Exception;
 

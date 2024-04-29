@@ -3,8 +3,8 @@
 namespace app\Repositories;
 
 use app\Collections\UserList;
-use app\Models\Email;
-use app\Models\User;
+use app\Entity\Email;
+use app\Entity\User;
 use app\Services\ConnectionDB;
 use PDO;
 use stdClass;
@@ -13,7 +13,6 @@ use stdClass;
 class UserRepository extends ConnectionDB
 {
     public function __construct(){}
-
 
     /**
      * @property string order

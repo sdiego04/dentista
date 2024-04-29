@@ -3,7 +3,7 @@
 namespace app\Helpers;
 
 use app\Collections\UserList;
-use app\Models\User;
+use app\Entity\User;
 use stdClass;
 
 
