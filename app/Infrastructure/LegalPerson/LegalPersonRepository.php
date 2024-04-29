@@ -14,9 +14,12 @@ class LegalPersonRepository extends ConnectionDB implements ILegalPersonReposito
 
     public function save(LegalPerson $legalPerson): int|bool
     {   
-        $sql = "INSERT INTO legal_person (cnpj, email, fantasy_name, name, password, status, parent_id) 
-            values ('{$legalPerson->getCnpj()}', '{$legalPerson->getEmail()}', '{$legalPerson->getFantasyName()}',
-            '{$legalPerson->getName()}', '{$legalPerson->getPassword()}', {$legalPerson->getStatus()}, {$legalPerson->getParentid()})";
+        $sql = "INSERT INTO legal_person (cnpj, email, fantasy_name,
+        name, password, status, parent_id) 
+        values ('{$legalPerson->getCnpj()}', '{$legalPerson->getEmail()}', 
+        '{$legalPerson->getFantasyName()}', '{$legalPerson->getName()}', 
+        '{$legalPerson->getPassword()}', {$legalPerson->getStatus()}, 
+        {$legalPerson->getParentid()})";
 
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
