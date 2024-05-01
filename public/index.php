@@ -19,6 +19,8 @@ try {
     $app->group('/api/legal-person', function(\Slim\Routing\RouteCollectorProxy $app){
         $app->post('', '\app\Api\LegalPersonController:save');
         $app->get('/cnpj/{doc}',  '\app\Api\LegalPersonController:getForCnpj');
+        $app->get('/inative/{doc}',  '\app\Api\LegalPersonController:inative');
+        $app->get('/active/{doc}',  '\app\Api\LegalPersonController:active');
     });
     $app->run();
 

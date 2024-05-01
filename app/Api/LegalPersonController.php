@@ -2,8 +2,12 @@
 
 namespace app\Api;
 
+use app\Application\LegalPerson\ActiveLegalPerson\ActiveLegalPerson;
+use app\Application\LegalPerson\ActiveLegalPerson\ActiveLegalPersonDto;
 use app\Application\LegalPerson\GetForCnpjLegalPerson\GetForCnpjLegalPerson;
 use app\Application\LegalPerson\GetForCnpjLegalPerson\GetForCnpjLegalPersonDto;
+use app\Application\LegalPerson\InativeLegalPerson\InativeLegalPerson;
+use app\Application\LegalPerson\InativeLegalPerson\InativeLegalPersonDto;
 use app\Application\LegalPerson\SaveLegalPersonRequired\SaveLegalPersonRequired;
 use app\Application\LegalPerson\SaveLegalPersonRequired\SaveLegalPersonRequiredDto;
 use app\Infrastructure\LegalPerson\LegalPersonRepository;
@@ -14,16 +18,51 @@ use function app\Helpers\buildLegalPersonDataObject;
 
 class LegalPersonController{
 
-    private SaveLegalPersonRequired $saveLegalPersonRequired;
-    private GetForCnpjLegalPerson $getForCnpjLegalPerson;
     private LegalPersonRepository $legalRepository;
 
     public function __construct()
     {
         $this->legalRepository = new LegalPersonRepository();
+    }
 
-        $this->saveLegalPersonRequired = new SaveLegalPersonRequired($this->legalRepository);
-        $this->getForCnpjLegalPerson = new GetForCnpjLegalPerson($this->legalRepository);
+    public function active(ServerRequest $request)
+    {
+        $cnpj = $request->getAttribute('doc');
+        if(empty($cnpj)){
+            response(400, false, '', get_string('required:params'));
+        }
+
+        $usecase = new GetForCnpjLegalPerson($this->legalRepository);
+        $response = $usecase->execute(new GetForCnpjLegalPersonDto($cnpj));
+
+        if(!$response){
+            response(204, false, '', get_string('warning:not_consult')); 
+        }
+
+        $usecase = new ActiveLegalPerson($this->legalRepository);
+        $response = $usecase->execute(new ActiveLegalPersonDto($response->getId(), $response->getCnpj()));
+
+        response(200, true, '', get_string('success:active'));
+    }
+
+    public function inative(ServerRequest $request)
+    {
+        $cnpj = $request->getAttribute('doc');
+        if(empty($cnpj)){
+            response(400, false, '', get_string('required:params'));
+        }
+
+        $usecase = new GetForCnpjLegalPerson($this->legalRepository);
+        $response = $usecase->execute(new GetForCnpjLegalPersonDto($cnpj));
+
+        if(!$response){
+            response(204, false, '', get_string('warning:not_consult')); 
+        }
+
+        $usecase = new InativeLegalPerson($this->legalRepository);
+        $response = $usecase->execute(new InativeLegalPersonDto($response->getId(), $response->getCnpj()));
+
+        response(200, true, '', get_string('success:inative'));
     }
 
     public function getForCnpj(ServerRequest $request)
@@ -33,8 +72,9 @@ class LegalPersonController{
         if(empty($cnpj)){
             response(400, false, '', get_string('required:params'));
         }
-
-        $response = $this->getForCnpjLegalPerson->execute(new GetForCnpjLegalPersonDto($cnpj));
+        
+        $usecase = new GetForCnpjLegalPerson($this->legalRepository);
+        $response = $usecase->execute(new GetForCnpjLegalPersonDto($cnpj));
        
         if(!$response){
             response(204, false, '', get_string('warning:not_consult')); 
@@ -60,10 +100,10 @@ class LegalPersonController{
             $params->status,
             $params->password,
             $params->parentid ?? null
-
         );
         
-        $this->saveLegalPersonRequired->execute($legalpersondto);
+        $usecase = new SaveLegalPersonRequired($this->legalRepository);
+        $usecase->execute($legalpersondto);
 
         response(200, true, '', get_string('success:registration'));
     }

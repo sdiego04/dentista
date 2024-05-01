@@ -6,6 +6,7 @@ use stdClass;
 
 class LegalPerson {
 
+  private int $id;
   private string $cnpj;
   private string $email;
   private string $name;
@@ -16,6 +17,7 @@ class LegalPerson {
 
   public function __construct(stdClass $params)
   {
+    $this->setId($params->id);
     $this->setCnpj($params->cnpj);
     $this->setEmail($params->email);
     $this->setFantasyName($params->fantasy_name);
@@ -160,6 +162,24 @@ class LegalPerson {
   public function setParentid(?int $parentid): self
   {
     $this->parentid = $parentid;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of id
+   */
+  public function getId(): int
+  {
+    return $this->id;
+  }
+
+  /**
+   * Set the value of id
+   */
+  public function setId(int $id): self
+  {
+    $this->id = $id;
 
     return $this;
   }

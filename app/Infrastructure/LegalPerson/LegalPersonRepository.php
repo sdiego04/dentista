@@ -52,18 +52,17 @@ class LegalPersonRepository extends ConnectionDB implements ILegalPersonReposito
         return $stmt;
     }
 
-    public function inative(string $cnpj):int|bool
+    public function inative(int $id, string $cnpj):int|bool
     {
-
-        $sql = "UPDATE legal_person SET status = 0,  updated_at = '" . date('Y-m-d H:i:s') . "' WHERE cnpf = " . $cnpj;
+        $sql = "UPDATE legal_person SET status = 0,  updated_at = '" . date('Y-m-d H:i:s') . "' WHERE id = " . $id . " AND cnpj = {$cnpj}";
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 
         return $stmt;
     } 
 
-    public function active(string $cnpj):int|bool{
-        $sql = "UPDATE legal_person SET status = 1,  updated_at = '" . date('Y-m-d H:i:s') . "' WHERE cnpf = " . $cnpj;
+    public function active(int $id, string $cnpj):int|bool{
+        $sql = "UPDATE legal_person SET status = 1,  updated_at = '" . date('Y-m-d H:i:s') . "' WHERE id = " . $id . " AND cnpj = {$cnpj}";
         $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 

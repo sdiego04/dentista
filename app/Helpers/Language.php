@@ -15,6 +15,8 @@ function getString(){
     //---- BEGIN GENERIC ---
     $string['success:registration'] = "Cadastro realizado com sucesso!";
     $string['success:consult'] = "Consulta realizada com sucesso!";
+    $string['success:inative'] = "Inativado com sucesso!";
+    $string['success:active'] = "Ativado com sucesso!";
     $string['warning:not_consult'] = "Nenhum registro encontrado!";
     $string['required:params'] = "Ha parametros faltando!";
     //---- END GENERIC 
