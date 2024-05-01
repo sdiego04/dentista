@@ -13,10 +13,10 @@ class ActiveLegalPerson{
         $this->personRepository = $personRepository;
     }
 
-    public function execute(ActiveLegalPersonDto $inativeLegalPersonDto){
+    public function execute(ActiveLegalPersonDto $activeLegalPersonDto){
         $this->personRepository->active(
-            $inativeLegalPersonDto->getId(),
-            $inativeLegalPersonDto->getCnpj()
+            $activeLegalPersonDto->getId(),
+            $activeLegalPersonDto->getCnpj()
         );
     }
 }

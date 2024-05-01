@@ -21,6 +21,7 @@ try {
         $app->get('/cnpj/{doc}',  '\app\Api\LegalPersonController:getForCnpj');
         $app->get('/inative/{doc}',  '\app\Api\LegalPersonController:inative');
         $app->get('/active/{doc}',  '\app\Api\LegalPersonController:active');
+        $app->patch('',  '\app\Api\LegalPersonController:update');
     });
     $app->run();
 

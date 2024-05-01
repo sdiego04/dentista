@@ -6,12 +6,12 @@ use stdClass;
 
 class LegalPerson {
 
-  private int $id;
+  private ?int $id;
   private string $cnpj;
   private string $email;
   private string $name;
   private string $fantasy_name;
-  private string $password;
+  private ?string $password;
   private int $status;
   private ?int $parentid = null;
 
@@ -22,7 +22,7 @@ class LegalPerson {
     $this->setEmail($params->email);
     $this->setFantasyName($params->fantasy_name);
     $this->setName($params->name);
-    $this->setPassword($params->password);
+    $this->setPassword($params->password ?? null);
     $this->setStatus($params->status);
     $this->setParentid($params->parentid);
   } 
@@ -93,23 +93,6 @@ class LegalPerson {
     return $this;
   }
 
-  /**
-   * Get the value of password
-   */
-  public function getPassword(): string
-  {
-    return $this->password;
-  }
-
-  /**
-   * Set the value of password
-   */
-  public function setPassword(string $password): self
-  {
-    $this->password = $password;
-
-    return $this;
-  }
 
   /**
    * Get the value of status
@@ -167,9 +150,27 @@ class LegalPerson {
   }
 
   /**
+   * Get the value of password
+   */
+  public function getPassword(): ?string
+  {
+    return $this->password;
+  }
+
+  /**
+   * Set the value of password
+   */
+  public function setPassword(?string $password): self
+  {
+    $this->password = $password;
+
+    return $this;
+  }
+
+  /**
    * Get the value of id
    */
-  public function getId(): int
+  public function getId(): ?int
   {
     return $this->id;
   }
@@ -177,7 +178,7 @@ class LegalPerson {
   /**
    * Set the value of id
    */
-  public function setId(int $id): self
+  public function setId(?int $id): self
   {
     $this->id = $id;
 

@@ -10,6 +10,8 @@ use app\Application\LegalPerson\InativeLegalPerson\InativeLegalPerson;
 use app\Application\LegalPerson\InativeLegalPerson\InativeLegalPersonDto;
 use app\Application\LegalPerson\SaveLegalPersonRequired\SaveLegalPersonRequired;
 use app\Application\LegalPerson\SaveLegalPersonRequired\SaveLegalPersonRequiredDto;
+use app\Application\LegalPerson\UpdateLegalPerson\UpdateLegalPerson;
+use app\Application\LegalPerson\UpdateLegalPerson\UpdateLegalPersonDto;
 use app\Infrastructure\LegalPerson\LegalPersonRepository;
 use GuzzleHttp\Psr7\ServerRequest;
 use stdClass;
@@ -23,6 +25,28 @@ class LegalPersonController{
     public function __construct()
     {
         $this->legalRepository = new LegalPersonRepository();
+    }
+
+    public function update()
+    {
+        $params = new stdClass();
+        $params = json_decode(file_get_contents('php://input'));
+
+        if(!isset($params->cnpj) || !isset($params->email)){
+            response(400, false, '', get_string('required:params'));
+        }
+
+        $usecase = new GetForCnpjLegalPerson($this->legalRepository);
+        $legalperson = $usecase->execute(new GetForCnpjLegalPersonDto($params->cnpj));
+        
+        if(!$legalperson){
+            response(204, false, '', get_string('warning:not_consult')); 
+        }
+
+        $usecase = new UpdateLegalPerson($this->legalRepository);
+        $response = $usecase->execute(new UpdateLegalPersonDto($legalperson->getId(), $params));
+
+        response(200, true, '', get_string('success:update'));
     }
 
     public function active(ServerRequest $request)
