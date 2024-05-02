@@ -54,10 +54,11 @@ class LegalPersonRepository extends ConnectionDB implements ILegalPersonReposito
         return $response;
     } 
 
-    public function delete(string $cnpj):int|bool
+    public function delete(int $id, string $cnpj):int|bool
     {
-        $sql = "UPDATE legal_person SET status = 0,  updated_at = '" . date('Y-m-d H:i:s') . "' WHERE cnpf = " . $cnpj;
-        $connection = ConnectionDB::getConnection();
+        $sql = "UPDATE legal_person 
+        SET status = 2,  updated_at = '" . date('Y-m-d H:i:s') . "' 
+        WHERE id = " . $id . " AND cnpj = {$cnpj}";        $connection = ConnectionDB::getConnection();
         $stmt = $connection->exec($sql);
 
         return $stmt;

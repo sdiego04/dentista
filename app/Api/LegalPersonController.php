@@ -4,6 +4,8 @@ namespace app\Api;
 
 use app\Application\LegalPerson\ActiveLegalPerson\ActiveLegalPerson;
 use app\Application\LegalPerson\ActiveLegalPerson\ActiveLegalPersonDto;
+use app\Application\LegalPerson\DeleteLegalPerson\DeleteLegalPerson;
+use app\Application\LegalPerson\DeleteLegalPerson\DeleteLegalPersonDto;
 use app\Application\LegalPerson\GetForCnpjLegalPerson\GetForCnpjLegalPerson;
 use app\Application\LegalPerson\GetForCnpjLegalPerson\GetForCnpjLegalPersonDto;
 use app\Application\LegalPerson\InativeLegalPerson\InativeLegalPerson;
@@ -25,6 +27,28 @@ class LegalPersonController{
     public function __construct()
     {
         $this->legalRepository = new LegalPersonRepository();
+    }
+
+    public function delete(ServerRequest $request)
+    {
+        $cnpj = $request->getAttribute('doc');
+        if(empty($cnpj)){
+            response(400, false, '', get_string('required:params'));
+        }
+
+        $usecase = new GetForCnpjLegalPerson($this->legalRepository);
+        $legalperson = $usecase->execute(new GetForCnpjLegalPersonDto($cnpj));
+        
+        if(!$legalperson){
+            response(204, false, '', get_string('warning:not_consult')); 
+        }
+
+        $usecase = new DeleteLegalPerson($this->legalRepository);
+        $usecase->execute(new DeleteLegalPersonDto($legalperson->getId(), $legalperson->getCnpj()));
+
+        response(200, true, '', get_string('success:delete'));
+
+
     }
 
     public function update()
