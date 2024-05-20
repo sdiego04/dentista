@@ -16,28 +16,42 @@ class LegalPersonRepository extends ConnectionDB implements ILegalPersonReposito
     {   
         $sql = "INSERT INTO legal_person (cnpj, email, fantasy_name,
         name, password, status, parent_id, created_at) 
-        values ('{$legalPerson->getCnpj()}', '{$legalPerson->getEmail()}', 
-        '{$legalPerson->getFantasyName()}', '{$legalPerson->getName()}', 
-        '{$legalPerson->getPassword()}', {$legalPerson->getStatus()}, 
-        {$legalPerson->getParentid()}, '".date('Y-m-d H:i:s')."')";
+        values (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+        $stmt = ConnectionDB::getConnection()->prepare($sql);
+        $stmt->bindValue(1, $legalPerson->getCnpj());
+        $stmt->bindValue(2, $legalPerson->getEmail());
+        $stmt->bindValue(3, $legalPerson->getFantasyName());
+        $stmt->bindValue(4, $legalPerson->getName());
+        $stmt->bindValue(5, $legalPerson->getPassword());
+        $stmt->bindValue(6, $legalPerson->getStatus());
+        $stmt->bindValue(7, $legalPerson->getParentid());
+        $stmt->bindValue(8, date('Y-m-d H:i:s'));
 
-        return $stmt;
+        $response = $stmt->execute();
+
+        return $response;
     } 
 
     public function update(LegalPerson $legalPerson)
     {
         $sql = "UPDATE legal_person 
-        SET name = '{$legalPerson->getName()}', fantasy_name = '{$legalPerson->getFantasyName()}', 
-        status = {$legalPerson->getStatus()}, parent_id = {$legalPerson->getParentid()}, updated_at = '".date('Y-m-d H:i:s')."' 
-        WHERE id = {$legalPerson->getId()} AND cnpj = '{$legalPerson->getCnpj()}'";
+        SET name = ?, fantasy_name = ?, 
+        status = ?, parent_id = ?, updated_at = ? 
+        WHERE id = ? AND cnpj = ?";
    
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+        $stmt = ConnectionDB::getConnection()->prepare($sql);
+        $stmt->bindValue(1, $legalPerson->getName());
+        $stmt->bindValue(2, $legalPerson->getFantasyName());
+        $stmt->bindValue(3, $legalPerson->getStatus());
+        $stmt->bindValue(4, $legalPerson->getParentid());
+        $stmt->bindValue(5, date('Y-m-d H:i:s'));
+        $stmt->bindValue(6, $legalPerson->getId());
+        $stmt->bindValue(7, $legalPerson->getCnpj());
 
-        return $stmt;
+        $response = $stmt->execute();
+
+        return $response;
     } 
 
     public function all():array|false
@@ -57,32 +71,49 @@ class LegalPersonRepository extends ConnectionDB implements ILegalPersonReposito
     public function delete(int $id, string $cnpj):int|bool
     {
         $sql = "UPDATE legal_person 
-        SET status = 2,  updated_at = '" . date('Y-m-d H:i:s') . "' 
-        WHERE id = " . $id . " AND cnpj = {$cnpj}";        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+        SET status = 2,  updated_at = ?
+        WHERE id = ? AND cnpj = ?";        
+        
+        $stmt = ConnectionDB::getConnection()->prepare($sql);
+        $stmt->bindValue(1,  date('Y-m-d H:i:s'));
+        $stmt->bindValue(2, $id);
+        $stmt->bindValue(3, $cnpj);
 
-        return $stmt;
+        $response = $stmt->execute();
+
+        return $response;
     }
 
     public function inative(int $id, string $cnpj):int|bool
     {
         $sql = "UPDATE legal_person 
-        SET status = 0,  updated_at = '" . date('Y-m-d H:i:s') . "' 
-        WHERE id = " . $id . " AND cnpj = {$cnpj}";
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+        SET status = 0,  updated_at = ?
+        WHERE id = ? AND cnpj = ?";
 
-        return $stmt;
+        $stmt = ConnectionDB::getConnection()->prepare($sql);
+        $stmt->bindValue(1, date('Y-m-d H:i:s'));
+        $stmt->bindValue(2, $id);
+        $stmt->bindValue(3, $cnpj);
+
+        $response = $stmt->execute();
+
+        return $response;
     } 
 
-    public function active(int $id, string $cnpj):int|bool{
+    public function active(int $id, string $cnpj):int|bool
+    {
         $sql = "UPDATE legal_person 
-        SET status = 1,  updated_at = '" . date('Y-m-d H:i:s') . "' 
-        WHERE id = " . $id . " AND cnpj = {$cnpj}";
-        $connection = ConnectionDB::getConnection();
-        $stmt = $connection->exec($sql);
+        SET status = 1,  updated_at = ? 
+        WHERE id = ? AND cnpj = ? ";
+        
+        $stmt = ConnectionDB::getConnection()->prepare($sql);
+        $stmt->bindValue(1, date('Y-m-d H:i:s'));
+        $stmt->bindValue(2, $id);
+        $stmt->bindValue(3, $cnpj);
 
-        return $stmt;
+        $response = $stmt->execute();
+
+        return $response;
     }
 
     public function getForCnpj(string $cnpj):LegalPerson|false

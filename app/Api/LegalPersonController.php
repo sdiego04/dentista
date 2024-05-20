@@ -123,7 +123,6 @@ class LegalPersonController{
         
         $usecase = new GetForCnpjLegalPerson($this->legalRepository);
         $response = $usecase->execute(new GetForCnpjLegalPersonDto($cnpj));
-       
         if(!$response){
             response(204, false, '', get_string('warning:not_consult')); 
         }

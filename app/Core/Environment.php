@@ -7,10 +7,10 @@
  * @copyright 2023-2024 by Diego Silva, all rights reserved.
  */
 
-define('DB_NAME', 'dentista');
+define('DB_NAME', 'dentista_homolog');
 define('DB_HOST', 'localhost');
-define('DB_USER', 'moodle');
-define('DB_PASSWORD', '!Q@W3e4r');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 define('APP_VERSION', '0.0.1');
 define('APP_NAME', 'DENTISTA');
 

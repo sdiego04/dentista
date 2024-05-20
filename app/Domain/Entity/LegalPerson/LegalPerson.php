@@ -17,14 +17,14 @@ class LegalPerson {
 
   public function __construct(stdClass $params)
   {
-    $this->setId($params->id);
+    $this->setId($params->id ?? null);
     $this->setCnpj($params->cnpj);
     $this->setEmail($params->email);
     $this->setFantasyName($params->fantasy_name);
     $this->setName($params->name);
     $this->setPassword($params->password ?? null);
     $this->setStatus($params->status);
-    $this->setParentid($params->parentid);
+    $this->setParentid($params->parent_id ?? null);
   } 
 
   /** 
