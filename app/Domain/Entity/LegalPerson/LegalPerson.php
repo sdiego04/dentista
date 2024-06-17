@@ -2,29 +2,25 @@
 
 namespace app\Domain\Entity\LegalPerson;
 
+use app\Domain\Entity\Person\Person;
 use stdClass;
 
-class LegalPerson {
+class LegalPerson extends Person{
 
-  private ?int $id;
   private string $cnpj;
-  private string $email;
-  private string $name;
   private string $fantasy_name;
-  private ?string $password;
-  private int $status;
-  private ?int $parentid = null;
 
   public function __construct(stdClass $params)
   {
-    $this->setId($params->id ?? null);
-    $this->setCnpj($params->cnpj);
-    $this->setEmail($params->email);
-    $this->setFantasyName($params->fantasy_name);
-    $this->setName($params->name);
-    $this->setPassword($params->password ?? null);
-    $this->setStatus($params->status);
-    $this->setParentid($params->parent_id ?? null);
+    parent::__construct(
+      $params->id,
+      $params->name,
+      $params->last_name,
+      $params->email,
+      $params->password,
+      $params->status,
+      $params->parent_id
+    );
   } 
 
   /** 
@@ -58,24 +54,6 @@ class LegalPerson {
 
 
   /**
-   * Get the value of email
-   */
-  public function getEmail(): string
-  {
-    return $this->email;
-  }
-
-  /**
-   * Set the value of email
-   */
-  public function setEmail(string $email): self
-  {
-    $this->email = $email;
-
-    return $this;
-  }
-
-  /**
    * Get the value of fantasy_name
    */
   public function getFantasyName(): string
@@ -93,97 +71,6 @@ class LegalPerson {
     return $this;
   }
 
-
-  /**
-   * Get the value of status
-   */
-  public function getStatus(): int
-  {
-    return $this->status;
-  }
-
-  /**
-   * Set the value of status
-   */
-  public function setStatus(int $status): self
-  {
-    $this->status = $status;
-
-    return $this;
-  }
-
-
-  /**
-   * Get the value of name
-   */
-  public function getName(): string
-  {
-    return $this->name;
-  }
-
-  /**
-   * Set the value of name
-   */
-  public function setName(string $name): self
-  {
-    $this->name = $name;
-
-    return $this;
-  }
-
-  /**
-   * Get the value of parentid
-   */
-  public function getParentid(): ?int
-  {
-    return $this->parentid;
-  }
-
-  /**
-   * Set the value of parentid
-   */
-  public function setParentid(?int $parentid): self
-  {
-    $this->parentid = $parentid;
-
-    return $this;
-  }
-
-  /**
-   * Get the value of password
-   */
-  public function getPassword(): ?string
-  {
-    return $this->password;
-  }
-
-  /**
-   * Set the value of password
-   */
-  public function setPassword(?string $password): self
-  {
-    $this->password = $password;
-
-    return $this;
-  }
-
-  /**
-   * Get the value of id
-   */
-  public function getId(): ?int
-  {
-    return $this->id;
-  }
-
-  /**
-   * Set the value of id
-   */
-  public function setId(?int $id): self
-  {
-    $this->id = $id;
-
-    return $this;
-  }
 }
 
 

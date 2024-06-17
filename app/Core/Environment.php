@@ -14,4 +14,16 @@ define('DB_PASSWORD', '');
 define('APP_VERSION', '0.0.1');
 define('APP_NAME', 'DENTISTA');
 
+
+/**
+ * @package Dentista
+ * @version 0.0.1
+ * @author Diego Silva 
+ * 
+ * STATUS CODES
+ * */
+define('ACTIVE', 1);
+define('INATIVE', 0);
+define('DELETE', 2);
+
 ?>

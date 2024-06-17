@@ -1,8 +1,7 @@
 <?php
 
-namespace app\Types;
+namespace app\Domain\Entity\Password;
 
-use Exception;
 
 class Password{
 
@@ -12,7 +11,7 @@ class Password{
     {
         $validMD5 = $this->isValidMd5($password);
         if(!$validMD5 && is_bool($validMD5)){
-            throw new Exception("Formato de senha invalida", 1); 
+            throw new \InvalidArgumentException("Formato de senha invalida", 1); 
         }
 
         $this->setPassword($password);
