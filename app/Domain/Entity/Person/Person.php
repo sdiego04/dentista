@@ -2,16 +2,11 @@
 
 namespace app\Domain\Entity\Person;
 
-use app\Domain\Entity\Email\Email;
-use app\Domain\Entity\Password\Password;
-
 abstract class Person
 {
     private ?int $id = null;
     private string $firstName;
     private string $lastName;
-    private Email $email;
-    private Password $password;
     private int $status = 0;
     private ?int $parentId = null;
 
@@ -19,16 +14,12 @@ abstract class Person
         int $id, 
         string $firstName, 
         string $lastName, 
-        string $email,
-        string $password,
         int $status,
         ?int $parentId = null)
     {
         $this->setId($id);
         $this->setFirstName($firstName);
         $this->setLastName($lastName);
-        $this->setEmail(new Email($email));
-        $this->setPassword(new Password($password));
         $this->setStatus($status);
         $this->setParentId($parentId);
         
@@ -71,46 +62,6 @@ abstract class Person
     public function setParentId($parentId)
     {
         $this->parentId = $parentId;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of password
-     */ 
-    public function getPassword():Password
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set the value of password
-     *
-     * @return  self
-     */ 
-    public function setPassword(Password $password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of email
-     */ 
-    public function getEmail():Email
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set the value of email
-     *
-     * @return  self
-     */ 
-    public function setEmail( Email $email)
-    {
-        $this->email = $email;
 
         return $this;
     }

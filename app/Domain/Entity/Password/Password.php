@@ -7,6 +7,7 @@ class Password{
 
     private string $password;
     
+    /** HASH MD5 */
     public function __construct(string $password)
     {
         $validMD5 = $this->isValidMd5($password);
@@ -14,18 +15,19 @@ class Password{
             throw new \InvalidArgumentException("Formato de senha invalida", 1); 
         }
 
-        $this->setPassword($password);
+        $this->setValue($password);
     }
 
 
-    public static function isValidMd5(string $password):int|false
+    public static function isValidMd5(string $password):bool
     {
-        return preg_match('/^[a-f0-9]{32}$/', $password);
+        return (bool) preg_match('/^[a-f0-9]{32}$/', $password);
+
     }
 
     public function getEncripty():string
     {
-        return self::encripty($this->getPassword());
+        return self::encripty($this->getValue());
     }
 
     public static function encripty(string $password):string
@@ -41,7 +43,7 @@ class Password{
     /**
      * Get the value of password
      */
-    public function getPassword(): string
+    public function getValue(): string
     {
         return $this->password;
     }
@@ -49,7 +51,7 @@ class Password{
     /**
      * Set the value of password
      */
-    public function setPassword(string $password): self
+    public function setValue(string $password): self
     {
         $this->password = $password;
 
