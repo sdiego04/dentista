@@ -19,8 +19,8 @@ define('DELETE', 'delete');
 
 
 /*------ BEGIN TYPE PERSON ------*/
-define('LEGAL_PERSON', '2');
-define('NATURAL_PERSON', '1');
+define('LEGAL_PERSON', 2);
+define('NATURAL_PERSON', 1);
 /*------ END TYPE PERSON ------*/
 
 

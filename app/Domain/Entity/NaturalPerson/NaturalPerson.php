@@ -2,58 +2,54 @@
 
 namespace app\Domain\Entity\NaturalPerson;
 
+use app\Domain\Entity\Cpf\Cpf;
+use app\Domain\Entity\Person\Person;
 use stdClass;
 
-class NaturalPerson{
-    
-    private ?int $id;
+class NaturalPerson extends Person{
+
     private string $name;
     private string $lastname;
-    private string $cpf;
-    private ?string $cro;
-    private ?int $profileid;
-    private ?int $typeperson;
-    private string $email;
+    private Cpf $cpf;
+    private ?int $typePersonCode = NATURAL_PERSON;
     private string $birthdate;
     private string $gender;
-    private string $password;
-    private ?int $parentid;
-    private int $status;
 
+    /**
+     * @property string name
+     * @property string lastname
+     * @property Cpf cpf
+     * @property int typepersoncode
+     * @property string birthdate
+     * @property string gender
+     */
     public function __construct(stdClass $param)
-    {
-        $this->setId($param->id ?? null);
-        $this->setName($param->name);
-        $this->setLastname($param->lastname);
-        $this->setCpf($param->cpf);
-        $this->setCro($param->cro);
-        $this->setProfileid($param->profileid);
-        $this->setTypeperson($param->typepersonid);
-        $this->setEmail($param->email);
-        $this->setBirthdate($param->birthdate);
-        $this->setGender($param->gender);
-        $this->setPassword($param->password);
-        $this->setParentid($param->parentid);
-        $this->setStatus($param->status);
-    }
-
-
-    /**
-     * Get the value of id
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
+    {   
+        parent::__construct(
+            $param ->id,
+            $param ->status,
+            $param ->parent_id
+        );
+        
+        $this->setParams($param);
     }
 
     /**
-     * Set the value of id
+     * @property string name
+     * @property string lastname
+     * @property Cpf cpf
+     * @property int typepersoncode
+     * @property string birthdate
+     * @property string gender
      */
-    public function setId(?int $id): self
+    private function setParams(stdClass $params)
     {
-        $this->id = $id;
-
-        return $this;
+        $this->setName($params->name);
+        $this->setLastname($params->lastname);
+        $this->setCpf(new Cpf($params->cpf));
+        $this->setTypePersonCode($params->typepersonid);
+        $this->setBirthdate($params->birthdate);
+        $this->setGender($params->gender);
     }
 
     /**
@@ -95,7 +91,7 @@ class NaturalPerson{
     /**
      * Get the value of cpf
      */
-    public function getCpf(): string
+    public function getCpf(): Cpf
     {
         return $this->cpf;
     }
@@ -103,81 +99,9 @@ class NaturalPerson{
     /**
      * Set the value of cpf
      */
-    public function setCpf(string $cpf): self
+    public function setCpf(Cpf $cpf): self
     {
         $this->cpf = $cpf;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of cro
-     */
-    public function getCro(): ?string
-    {
-        return $this->cro;
-    }
-
-    /**
-     * Set the value of cro
-     */
-    public function setCro(?string $cro): self
-    {
-        $this->cro = $cro;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of profileid
-     */
-    public function getProfileid(): ?int
-    {
-        return $this->profileid;
-    }
-
-    /**
-     * Set the value of profileid
-     */
-    public function setProfileid(?int $profileid): self
-    {
-        $this->profileid = $profileid;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of typeperson
-     */
-    public function getTypeperson(): ?int
-    {
-        return $this->typeperson;
-    }
-
-    /**
-     * Set the value of typeperson
-     */
-    public function setTypeperson(?int $typeperson): self
-    {
-        $this->typeperson = $typeperson;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of email
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set the value of email
-     */
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -219,55 +143,21 @@ class NaturalPerson{
     }
 
     /**
-     * Get the value of password
-     */
-    public function getPassword(): string
+     * Get the value of typePersonCode
+     */ 
+    public function getTypePersonCode()
     {
-        return $this->password;
+        return $this->typePersonCode;
     }
 
     /**
-     * Set the value of password
-     */
-    public function setPassword(string $password): self
+     * Set the value of typePersonCode
+     *
+     * @return  self
+     */ 
+    public function setTypePersonCode($typePersonCode)
     {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of parentid
-     */
-    public function getParentid(): ?int
-    {
-        return $this->parentid;
-    }
-
-    /**
-     * Set the value of parentid
-     */
-    public function setParentid(?int $parentid): self
-    {
-        $this->parentid = $parentid;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of status
-     */
-    public function getStatus(): int
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the value of status
-     */
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
+        $this->typePersonCode = $typePersonCode;
 
         return $this;
     }

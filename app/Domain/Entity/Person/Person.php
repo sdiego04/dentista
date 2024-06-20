@@ -5,47 +5,21 @@ namespace app\Domain\Entity\Person;
 abstract class Person
 {
     private ?int $id = null;
-    private string $firstName;
-    private string $lastName;
-    private int $status = 0;
+    private int $status = STATUS_ACTIVE;
     private ?int $parentId = null;
 
-    public function __construct(
-        int $id, 
-        string $firstName, 
-        string $lastName, 
-        int $status,
-        ?int $parentId = null)
+    /**
+     * @property int id
+     * @property int status
+     * @property int parent_id
+     */
+    public function __construct(int $id, int $status, int $parentId = null)
     {
         $this->setId($id);
-        $this->setFirstName($firstName);
-        $this->setLastName($lastName);
         $this->setStatus($status);
         $this->setParentId($parentId);
-        
     }
-
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-
+ 
     /**
      * Get the value of parentId
      */ 

@@ -2,10 +2,8 @@
 namespace Tests\Domain\Entity\LegalPerson;
 
 use app\Domain\Entity\Cnpj\Cnpj;
-use app\Domain\Entity\Email\Email;
 use PHPUnit\Framework\TestCase;
 use app\Domain\Entity\LegalPerson\LegalPerson;
-use app\Domain\Entity\Password\Password;
 
 class LegalPersonTest extends TestCase
 {
@@ -15,14 +13,11 @@ class LegalPersonTest extends TestCase
     {
         $params = new \stdClass();
         $params->id = 1;
-        $params->name = 'Test';
-        $params->last_name = 'User';
-        $params->email = 's.diego04@gmail.com';
-        $params->password = 'deb5e3dcee05105d425809b458534ab6';
         $params->status = 1;
         $params->parent_id = null;
         $params->cnpj = '44.140.514/0001-18';
         $params->fantasy_name = 'Test Company';
+        $params->typepersonid = 2;
 
         $this->legalPerson = new LegalPerson($params);
     }
@@ -38,55 +33,6 @@ class LegalPersonTest extends TestCase
     {
         $this->legalPerson->setId(3232);
         $this->assertEquals(3232, $this->legalPerson->getId());
-    }
-
-    public function testGetFirstName(): void
-    {
-        $this->legalPerson->setFirstName('John');
-        $this->assertEquals('John', $this->legalPerson->getFirstName());
-    }
-
-    public function testSetFirstName(): void
-    {
-        $this->legalPerson->setFirstName('John');
-        $this->assertEquals('John', $this->legalPerson->getFirstName());
-    }
-
-    public function testGetLastName(): void
-    {
-        $this->legalPerson->setLastName('Silva');
-        $this->assertEquals('Silva', $this->legalPerson->getLastName());
-    }
-
-    public function testSetLastName(): void
-    {
-        $this->legalPerson->setLastName('Silva');
-        $this->assertEquals('Silva', $this->legalPerson->getLastName());
-    }
-
-    public function testGetEmail(): void
-    {
-        $this->legalPerson->setEmail(new Email('s.diego04@gmail.com'));
-        $this->assertEquals('s.diego04@gmail.com', $this->legalPerson->getEmail()->getAddress());
-    }
-
-    public function testSetEmail(): void
-    {
-        $this->legalPerson->setEmail(new Email('s.diego04@gmail.com'));
-        $this->assertEquals('s.diego04@gmail.com', $this->legalPerson->getEmail()->getAddress());
-    }
-
-
-    public function testGetPassword(): void
-    {
-        $this->legalPerson->setPassword(new Password('deb5e3dcee05105d425809b458534ab6'));
-        $this->assertEquals('deb5e3dcee05105d425809b458534ab6', $this->legalPerson->getPassword()->getValue());
-    }
-
-    public function testSetPassword(): void
-    {
-        $this->legalPerson->setPassword(new Password('deb5e3dcee05105d425809b458534ab6'));
-        $this->assertEquals('deb5e3dcee05105d425809b458534ab6', $this->legalPerson->getPassword()->getValue());
     }
 
     public function testGetCnpj(): void
@@ -113,6 +59,18 @@ class LegalPersonTest extends TestCase
         $this->assertEquals('Test Company', $this->legalPerson->getFantasyName());
     }
 
+    public function testGetStatus(): void
+    {
+        $this->legalPerson->setStatus(1);
+        $this->assertEquals(1, $this->legalPerson->getStatus());
+    }
+
+    public function testSetStatus(): void
+    {
+        $this->legalPerson->setStatus(1);
+        $this->assertEquals(1, $this->legalPerson->getStatus());
+    }
+
     public function testGetParentId(): void
     {
         $this->legalPerson->setParentId(1);
@@ -123,6 +81,18 @@ class LegalPersonTest extends TestCase
     {
         $this->legalPerson->setParentId(1);
         $this->assertEquals(1, $this->legalPerson->getParentId());
+    }
+
+    public function testGetTypePersonCode(): void
+    {
+        $this->legalPerson->setTypePersonCode(1);
+        $this->assertEquals(1, $this->legalPerson->getTypePersonCode());
+    }
+
+    public function testSetTypePersonCode(): void
+    {
+        $this->legalPerson->setTypePersonCode(1);
+        $this->assertEquals(1, $this->legalPerson->getTypePersonCode());
     }
 }
 ?>

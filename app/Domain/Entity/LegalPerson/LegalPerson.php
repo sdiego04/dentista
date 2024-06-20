@@ -3,25 +3,17 @@
 namespace app\Domain\Entity\LegalPerson;
 
 use app\Domain\Entity\Cnpj\Cnpj;
-use app\Domain\Entity\Email\Email;
-use app\Domain\Entity\Password\Password;
 use app\Domain\Entity\Person\Person;
 use stdClass;
 
 class LegalPerson extends Person{
 
   private Cnpj $cnpj;
-  private Email $email;
-  private Password $password;
   private string $fantasy_name;
-  
-  /** 2 = Juridica */
-  private int $typePersonCode = 2;
+  private int $typePersonCode = LEGAL_PERSON;
 
   /**
    * @property int id
-   * @property string name
-   * @property string last_name
    * @property int status
    * @property int parent_id
    */
@@ -29,19 +21,24 @@ class LegalPerson extends Person{
   {
     parent::__construct(
       $params->id,
-      $params->name,
-      $params->last_name,
       $params->status,
       $params->parent_id
     );
+    
+    $this->setParams($params);
+  } 
 
+   /**
+   * @property int id
+   * @property int status
+   * @property int parent_id
+   */
+  private function setParams(stdClass $params)
+  {
     $this->setCnpj(new Cnpj($params->cnpj));
     $this->setFantasyName($params->fantasy_name);
-    $this->setEmail(new Email($params->email));
-    $this->setPassword(new Password($params->password));
     $this->setTypePersonCode(LEGAL_PERSON);
-
-  } 
+  }
 
   /** 
    * @param stdClass $params - all properties in the this class
@@ -90,46 +87,6 @@ class LegalPerson extends Person{
   public function setCnpj(Cnpj $cnpj)
   {
     $this->cnpj = $cnpj;
-
-    return $this;
-  }
-
-  /**
-   * Get the value of email
-   */ 
-  public function getEmail():Email
-  {
-    return $this->email;
-  }
-
-  /**
-   * Set the value of email
-   *
-   * @return  self
-   */ 
-  public function setEmail(Email $email)
-  {
-    $this->email = $email;
-
-    return $this;
-  }
-
-  /**
-   * Get the value of password
-   */ 
-  public function getPassword()
-  {
-    return $this->password;
-  }
-
-  /**
-   * Set the value of password
-   *
-   * @return  self
-   */ 
-  public function setPassword(Password $password)
-  {
-    $this->password = $password;
 
     return $this;
   }
