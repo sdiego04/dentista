@@ -10,7 +10,7 @@ class Cpf{
     {
         $validCpf = $this->isValidCpf($cpf);
         if(!$validCpf && is_bool($validCpf)){
-            throw new \InvalidArgumentException("Formato ou cpf invalido", 1); 
+            throw new \InvalidArgumentException("Formato ou cpf invalido", 400); 
         }
         
         $cpf = preg_replace('/[^0-9]/', '', (string) $cpf);

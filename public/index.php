@@ -24,6 +24,16 @@ try {
         $app->get('/delete/{doc}',  '\app\Api\LegalPersonController:delete');
         $app->patch('',  '\app\Api\LegalPersonController:update');
     });
+
+    $app->group('/api/owner', function(\Slim\Routing\RouteCollectorProxy $app){
+        $app->get('/cnpj/{doc}',  '\app\Api\LegalPersonController:getForCnpj');
+    });
+
+    $app->group('/api/login', function(\Slim\Routing\RouteCollectorProxy $app){
+        $app->post('', '\app\Api\LoginController:index');
+    });
+    
+
     $app->run();
 
 } catch (\Throwable $th) {

@@ -2,7 +2,6 @@
 
 namespace app\Domain\Entity\Password;
 
-
 class Password{
 
     private string $password;
@@ -12,7 +11,7 @@ class Password{
     {
         $validMD5 = $this->isValidMd5($password);
         if(!$validMD5 && is_bool($validMD5)){
-            throw new \InvalidArgumentException("Formato de senha invalida", 1); 
+            throw new \InvalidArgumentException("Formato de senha invalida", 400); 
         }
 
         $this->setValue($password);

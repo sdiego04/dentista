@@ -32,6 +32,7 @@ class LegalPersonController{
     public function delete(ServerRequest $request)
     {
         $cnpj = $request->getAttribute('doc');
+        var_dump($cnpj);die;
         if(empty($cnpj)){
             response(400, false, '', get_string('required:params'));
         }

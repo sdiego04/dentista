@@ -27,7 +27,6 @@ class ComposerStaticInit612ca5ea420498e535d0e0f755755e39
         '4f907f86d3cee6dd2fc642c7eaa85243' => __DIR__ . '/../..' . '/app/Helpers/Language.php',
         'bdf457cbe56a826afb3c173753e90204' => __DIR__ . '/../..' . '/app/Helpers/SqlHelper.php',
         '3570b972e5e326154afd21e72afcb81a' => __DIR__ . '/../..' . '/app/Helpers/UserSqlHelper.php',
-        '94330e6bcdaaa509bf0fab429047101c' => __DIR__ . '/../..' . '/app/Helpers/UserHelper.php',
         '3844f1eda179d9d6a945c91026acecfe' => __DIR__ . '/../..' . '/app/Helpers/LegalPersonHelper.php',
         '135576fe7df0ca67f1ca1d8c5d875cdd' => __DIR__ . '/../..' . '/app/Core/Constants.php',
     );

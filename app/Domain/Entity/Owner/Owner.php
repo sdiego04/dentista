@@ -12,9 +12,7 @@ class Owner extends NaturalPerson{
     private int $profileId;
     private Email $email;
     private Password $password;
-    
 
-    
     public function __construct(stdClass $params)
     {
         parent::__construct($params);
